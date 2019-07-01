@@ -15,3 +15,5 @@ These are a list of individuals who have contributed to this project, past and p
 * [Jennifer Tao](https://github.com/jentao) (Current)
 * [Elisa Truong](https://github.com/etruong) (Current)
 * [Max Zhou](https://github.com/zhouyifan0904) (Current)
+
+
