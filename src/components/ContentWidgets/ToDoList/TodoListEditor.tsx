@@ -3,7 +3,8 @@ import { WidgetEditorProps } from '../../ContentMapping/ContentMapping';
 import { TodoItem, TodoList } from './TodoList';
 import "./TodoStyle.css";
 
-// an input box for adding a new todo item
+// an input box for adding a new todo item or checking/unchecking
+// existing todo items.
 //
 // Last Modified
 // Max Zhou
