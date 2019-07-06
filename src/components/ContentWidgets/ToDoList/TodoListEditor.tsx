@@ -1,24 +1,22 @@
 import React from 'react';
 import { WidgetEditorProps } from '../../ContentMapping/ContentMapping';
-import { TodoItem } from './TodoList';
+import { TodoItem, TodoList } from './TodoList';
+import "./TodoStyle.css";
 
+// an input box for adding a new todo item
+//
+// Last Modified
+// Max Zhou
+// July 6, 2019
+//
 export const TodoListEditor: React.FC<WidgetEditorProps> = ({
-  // originalContent is the content that is saved on firebase. It is the version of content that is live before
-  // any changes are made
-  originalContent,
-
-  // editedContent is the content that is being edited and stored within the WidgetEditor's state. If you go to
-  // src/components/ContentEditor/WidgetEditor/WidgetEditor.tsx, you will see where the edited content is set.
   editedContent,
-
-  // setEditedContentOnChange is a function that is defined within WidgetEditor which will update the widget property
-  // within the editedContent. You can only modify one key value pair at a time. It takes in a keyToChange (string)
-  // and a valueToChange (any). Think of this like the handleChange in all those React tutorials.
   setEditedContentOnChange
 }) => {
 	// get the list
-	let currentList = editedContent.todoList_items || [];
-	let list_html = currentList.map((item: TodoItem, index: number) => <li className={item.check} key={index}>{item.name}</li>);
+	let currentList: TodoItem[] = editedContent.todoList_items || [];
+
+	let list_html = currentList.map((item: TodoItem, index: number) => <li className={item.check} key={index}>{item.name}<button type="button" onClick={(e) => handleCheck(index)}>done</button></li>);
 
 	let newTodoName: string = "";
 
@@ -33,6 +31,17 @@ export const TodoListEditor: React.FC<WidgetEditorProps> = ({
 		currentList.push({ name: newTodoName, check: "unchecked"});
 		setEditedContentOnChange("todoList_items", currentList);
 	}
+
+	// mark a todo as checked
+	let handleCheck = (index: number) => {
+		if (currentList[index].check == "checked") {
+			currentList[index].check = "unchecked";
+		} else {
+			currentList[index].check = "checked";
+		}
+		setEditedContentOnChange("todoList_items", currentList);
+	}
+
   return <>
 		<ul>
 			{list_html}

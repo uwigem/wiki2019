@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
+import './TodoStyle.css';
 
 
 export type TodoItem = {
 	name: string
-	check: string // check | uncheck
+	check: string // checked | unchecked
 }
 
 // Return a unordered list of todos 
@@ -15,8 +16,6 @@ export type TodoItem = {
 // July 5, 2019
 //
 export const TodoList: React.FC<ContentSingularData> = ({ todoList_items }) => {
-  // if the props are undefined (error checking, because we said they were optional inside the ContentSingularData typedef
-  // then just return an empty react object.
   if (!todoList_items) {
     return <></>
 	};
