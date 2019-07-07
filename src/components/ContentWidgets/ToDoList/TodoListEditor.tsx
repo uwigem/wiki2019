@@ -28,6 +28,12 @@ export const TodoListEditor: React.FC<WidgetEditorProps> = ({
 	// make a local copy with spread
 	let localList = [...currentList];
 
+	// complete a task or mark it incomplete
+	let complete = (index: number) => {
+		localList[index].complete = !localList[index].complete;
+		setEditedContentOnChange("todoList_items", localList);
+	}
+
 	let listItems = currentList.map((item: TodoItem, index: number) =>
 		<li className={item.complete ? "complete" : "incomplete"} key={shortid.generate()}>
 			{item.name}
@@ -44,12 +50,6 @@ export const TodoListEditor: React.FC<WidgetEditorProps> = ({
 	let handleSubmit = (e: any) => {
 		e.preventDefault();
 		localList.push({ name: newTodoName, complete: false});
-		setEditedContentOnChange("todoList_items", localList);
-	}
-
-	// complete a task or mark it incomplete
-	let complete = (index: number) => {
-		localList[index].complete = !localList[index].complete;
 		setEditedContentOnChange("todoList_items", localList);
 	}
 
