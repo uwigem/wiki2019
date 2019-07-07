@@ -1,4 +1,4 @@
-import { TodoItem } from '../ContentWidgets/ToDoList/TodoList';
+import { TodoItem } from '../ContentWidgets/TodoList/TodoList';
 
 export type ContentSingularData = {
     plainText_content?: string

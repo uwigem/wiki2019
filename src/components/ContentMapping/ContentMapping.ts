@@ -5,8 +5,8 @@ import { Stub, StubEditor } from '../ContentWidgets/_Stub/Stub';
 import { ContentSingularData } from '../_data/ContentSingularData';
 import { ExampleImage } from '../ContentWidgets/ExampleImage/ExampleImage';
 import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageEditor';
-import { TodoList } from '../ContentWidgets/ToDoList/TodoList';
-import { TodoListEditor } from '../ContentWidgets/ToDoList/TodoListEditor';
+import { TodoList } from '../ContentWidgets/TodoList/TodoList';
+import { TodoListEditor } from '../ContentWidgets/TodoList/TodoListEditor';
 
 export type WidgetEditorProps = {
     originalContent: ContentSingularData,
