@@ -5,8 +5,8 @@ import { Stub, StubEditor } from "../ContentWidgets/_Stub/Stub";
 import { ContentSingularData } from "../_data/ContentSingularData";
 import { ExampleImage } from "../ContentWidgets/ExampleImage/ExampleImage";
 import { ExampleImageEditor } from "../ContentWidgets/ExampleImage/ExampleImageEditor";
-import { ToDoList } from "../ContentWidgets/ToDoList/ToDoList";
-import { ToDoListEditor } from "../ContentWidgets/ToDoList/ToDoListEditor";
+import { Separator } from "../ContentWidgets/Separator/Separator";
+import { SeparatorEditor } from "../ContentWidgets/Separator/SeparatorEditor";
 
 export type WidgetEditorProps = {
   originalContent: ContentSingularData;
@@ -25,7 +25,7 @@ export enum WidgetTypes {
   PLAIN_TEXT = "PLAIN_TEXT",
   STUB = "STUB",
   EXAMPLE_IMAGE = "EXAMPLE_IMAGE",
-  TO_DO_LIST = "TO_DO_LIST"
+  SEPARATOR = "SEPARATOR"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -41,8 +41,8 @@ export const ContentMapping: ContentMappingType = {
     widget: ExampleImage,
     editor: ExampleImageEditor
   },
-  TO_DO_LIST: {
-    widget: ToDoList,
-    editor: ToDoListEditor
+  SEPARATOR: {
+    widget: Separator,
+    editor: SeparatorEditor
   }
 };
