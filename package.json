@@ -17,6 +17,8 @@
         "@types/react-dom": "16.8.4",
         "deep-equal": "^1.0.1",
         "detect-browser": "^4.5.0",
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-16": "^1.14.0",
         "firebase": "^6.1.0",
         "fontfaceobserver": "^2.1.0",
         "react": "^16.8.6",
