@@ -1,0 +1,30 @@
+.img-row {
+    display: flex;
+    margin: 0px 30px;
+}
+
+.img-row-item {
+    flex: 1 1 0;
+    margin: 10px 0px 0px;
+    padding: 0px 8px;
+}
+
+@media (max-width: 785px) {
+    .img-row {
+        flex-direction: column;
+    }
+}
+
+img {
+    width: 100%;
+    max-width: 400px;
+    min-width: 160px;
+    height: auto;
+    min-height: 280px;
+    object-fit: cover;
+    margin: auto auto 10px;
+}
+
+figcaption {
+    padding: 5px;
+}
