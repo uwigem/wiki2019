@@ -1,0 +1,20 @@
+.img-row {
+    display: flex;
+}
+
+.img-row-item {
+    min-width: 20%;
+    margin: 10px 0px 0px;
+    padding: 0px 8px;
+}
+
+img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0px 0px 10px;
+}
+
+figcaption {
+    padding: 5px;
+}
