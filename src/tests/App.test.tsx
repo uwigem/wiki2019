@@ -2,10 +2,18 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-// import ConceptCard from '../../ui/koconut/components/ConceptCard';
+import App from '../App';
 
 // configure enzyme to work with React version 16
 Enzyme.configure({ adapter: new Adapter() });
+
+describe("App component", () => {
+    it("Mounts correctly", () => {
+        const wrapper = mount(<App IEOREDGE={true} currYear={2019} firebase={null} ContentEditor={() => <></>} />);
+        // console.log(wrapper.invoke);
+        // console.log(wrapper.invoke('a'))
+    })
+})
 
 // describe('<ConceptCard /> component', () => {
 //     const generateExercise = jest.fn()

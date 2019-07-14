@@ -12,7 +12,7 @@ import { WidgetTypes } from '../ContentMapping/ContentMapping';
 import { ContentSingularData } from '../_data/ContentSingularData';
 import { HistoryTypes } from '../_debug/EditorHistory';
 
-type ContentEditorProps = {
+export type ContentEditorProps = {
     contentData: ContentData,
     currYear: number
 }

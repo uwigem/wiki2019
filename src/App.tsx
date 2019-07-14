@@ -11,10 +11,10 @@ import { DebugFonts } from './components/_debug/DebugFonts';
 import "./App.css";
 
 // comment out for production build
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
-import { ContentEditor } from './components/ContentEditor/ContentEditor';
+// import 'firebase/auth';
+// import 'firebase/database';
+import { ContentEditorProps } from './components/ContentEditor/ContentEditor';
+
 
 // This line is to remove a bug that Firefox has
 // TODO: insert link explaining why
@@ -22,7 +22,9 @@ window.addEventListener("unload", function () { });
 
 type AppProps = {
     IEOREDGE: boolean,
-    currYear: number
+    currYear: number,
+    firebase?: any,
+    ContentEditor: React.FC<ContentEditorProps>
 }
 const debugURL = "/Editor";
 
@@ -33,7 +35,7 @@ const debugURL = "/Editor";
  * William Kwok
  * June 16, 2019
  */
-const App: React.FC<AppProps> = ({ IEOREDGE, currYear }) => {
+const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [contentData, setContentData] = useState<ContentData>(Data.getContentData());
     const [pageTitle, setPageTitle] = useState<string>(debugURL)
