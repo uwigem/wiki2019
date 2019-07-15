@@ -86,7 +86,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
             Add Image
         </Button>
         <h3> Preview </h3>
-        <div className="img-row" style={{ width: "75%" }}>
+        <div className="img-row">
             {pictureCaptionPairs.map((pair: imgRowItem, index: number) => (
                 <div className="img-row-item">
                     <a href={pair.extLink ? pair.extLink : pair.imgLink}>
