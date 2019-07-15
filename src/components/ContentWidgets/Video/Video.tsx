@@ -3,7 +3,7 @@ import { ContentSingularData } from '../../_data/ContentSingularData';
 import './Video.css';
 
 /**
- * Embeds a video.
+ * Shows an embedded video.
  * 
  * Last Modified
  * Max Zhou

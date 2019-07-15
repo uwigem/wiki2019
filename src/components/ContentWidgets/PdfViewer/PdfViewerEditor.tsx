@@ -2,6 +2,15 @@ import React from 'react';
 import { WidgetEditorProps } from '../../ContentMapping/ContentMapping';
 import './PdfViewer.css';
 
+/**
+ * Let the user create an embedded pdf by providing a link
+ * and specifying width percentage and height in pixels.
+ * 
+ * Last Modified
+ * Max Zhou
+ * July 13, 2019
+ */
+
 export const PdfViewerEditor: React.FC<WidgetEditorProps> = ({
     originalContent,
     editedContent,

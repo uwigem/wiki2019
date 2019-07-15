@@ -2,6 +2,16 @@ import React from 'react';
 import { WidgetEditorProps } from '../../ContentMapping/ContentMapping';
 import './Video.css';
 
+/**
+ * Let the user create an embedded video by specifying 
+ * the link and a percentage width. Height will be automatic
+ * based on the aspect ratio.
+ * 
+ * Last Modified
+ * Max Zhou
+ * July 13, 2019
+ */
+
 export const VideoEditor: React.FC<WidgetEditorProps> = ({
     originalContent,
     editedContent,
