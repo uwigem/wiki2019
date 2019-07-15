@@ -9,14 +9,14 @@ import { ImagesInRow } from '../ContentWidgets/ImagesInRow/ImagesInRow'
 import { ImagesInRowEditor } from '../ContentWidgets/ImagesInRow/ImagesInRowEditor'
 
 export type WidgetEditorProps = {
-    originalContent: ContentSingularData,
-    editedContent: ContentSingularData,
+    originalContent: ContentSingularData
+    editedContent: ContentSingularData
     setEditedContentOnChange: (keyToChange: string, valueToChange: any) => void
 }
 
 type ContentMappingType = {
     [idx: string]: {
-        widget: React.FC<ContentSingularData>,
+        widget: React.FC<ContentSingularData>
         editor: React.FC<WidgetEditorProps>
     }
 }
