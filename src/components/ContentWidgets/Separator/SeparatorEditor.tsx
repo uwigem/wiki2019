@@ -9,7 +9,6 @@ import { DEFAULT_WIDTH, DEFAULT_COLOR, Color } from './SeparatorConstants';
  *
  * Last Modified
  * Jennifer Tao
-<<<<<<< HEAD
  * July 14, 2019
  */
 export const SeparatorEditor: React.FC<WidgetEditorProps> = ({
