@@ -5,8 +5,8 @@ import { Stub, StubEditor } from '../ContentWidgets/_Stub/Stub';
 import { ContentSingularData } from '../_data/ContentSingularData';
 import { ExampleImage } from '../ContentWidgets/ExampleImage/ExampleImage';
 import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageEditor';
-import { Separator } from "../ContentWidgets/Separator/Separator";
-import { SeparatorEditor } from "../ContentWidgets/Separator/SeparatorEditor";
+import { Separator } from '../ContentWidgets/Separator/Separator';
+import { SeparatorEditor } from '../ContentWidgets/Separator/SeparatorEditor';
 
 export type WidgetEditorProps = {
     originalContent: ContentSingularData,
@@ -42,7 +42,7 @@ export const ContentMapping: ContentMappingType = {
         editor: ExampleImageEditor
     },
     SEPARATOR: {
-    widget: Separator,
-    editor: SeparatorEditor
-  }
+        widget: Separator,
+        editor: SeparatorEditor
+    }
 }
