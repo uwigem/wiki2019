@@ -5,4 +5,4 @@ export type ContentSingularData = {
     [idx: string]: any;
     separator_width?: number;
     separator_color?: { r: number; g: number; b: number };
-};
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
 import './Separator.css';
-
 /**
  * A separator widget with the given width and color
  * separator_width  percentage width
@@ -9,6 +8,7 @@ import './Separator.css';
  *
  * Last Modified
  * Jennifer Tao
+<<<<<<< HEAD
  * July 14, 2019
  */
 export const Separator: React.FC<ContentSingularData> = ({

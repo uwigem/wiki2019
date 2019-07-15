@@ -8,6 +8,7 @@ import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageE
 import { Separator } from '../ContentWidgets/Separator/Separator';
 import { SeparatorEditor } from '../ContentWidgets/Separator/SeparatorEditor';
 
+
 export type WidgetEditorProps = {
     originalContent: ContentSingularData,
     editedContent: ContentSingularData,
