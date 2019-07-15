@@ -84,18 +84,15 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
             }}
         >
             Add Image
-		</Button>
+        </Button>
         <h3> Preview </h3>
-        <p> click on image to remove</p>
-        <div className="img-row">
+        <div className="img-row" style={{ width: "75%" }}>
             {pictureCaptionPairs.map((pair: imgRowItem, index: number) => (
                 <div className="img-row-item">
-                    <figure>
-                        <a href={pair.extLink ? pair.extLink : pair.imgLink}>
-                            <img src={pair.imgLink} alt={"image" + index} />
-                        </a>
-                        <figcaption> {pair.imgCaption} </figcaption>
-                    </figure>
+                    <a href={pair.extLink ? pair.extLink : pair.imgLink}>
+                        <img src={pair.imgLink} alt={"image" + index} />
+                    </a>
+                    <p>{pair.imgCaption}</p>
                     <Button
                         variant="outlined"
                         onClick={() => {
