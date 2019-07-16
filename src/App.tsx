@@ -117,7 +117,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
         } else {
             setContentData(Data.getContentData())
         }
-    }, [pageTitle, imgsLoaded, imgsToPrefetch, currYear]);
+    }, [pageTitle, imgsLoaded, imgsToPrefetch, currYear, firebase]);
 
     /**
      * Sets the loading state to true. This is used for in between pages. This function MUST be sent
