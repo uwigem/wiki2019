@@ -4,16 +4,16 @@ import './PdfViewer.css';
 
 /**
  * Showing an embedded pdf window
- * 
+ *
  * Last Modified
  * Max Zhou
- * July 13, 2019
+ * July 15, 2019
  */
 export const PdfViewer: React.FC<ContentSingularData> = ({
     pdfViewer_pdfLink, pdfViewer_pdfWidthPercentage, pdfViewer_pdfHeightPixel
 }) => {
-    if (!pdfViewer_pdfLink || 
-        !pdfViewer_pdfWidthPercentage || 
+    if (!pdfViewer_pdfLink ||
+        !pdfViewer_pdfWidthPercentage ||
         !pdfViewer_pdfHeightPixel) {
         return <></>;
     }
@@ -22,10 +22,10 @@ export const PdfViewer: React.FC<ContentSingularData> = ({
         width: pdfViewer_pdfWidthPercentage + "%",
         height: pdfViewer_pdfHeightPixel + "px"
     };
-    
+
     return <embed
-        className="pdf"
-        src={pdfViewer_pdfLink} 
+        className="pdf-viewer-pdf"
+        src={pdfViewer_pdfLink}
         type="application/pdf"
         style={pdfStyle} />
 }

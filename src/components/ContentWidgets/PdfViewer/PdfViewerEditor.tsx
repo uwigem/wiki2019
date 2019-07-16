@@ -5,10 +5,10 @@ import './PdfViewer.css';
 /**
  * Let the user create an embedded pdf by providing a link
  * and specifying width percentage and height in pixels.
- * 
+ *
  * Last Modified
  * Max Zhou
- * July 13, 2019
+ * July 15, 2019
  */
 
 export const PdfViewerEditor: React.FC<WidgetEditorProps> = ({
@@ -22,7 +22,7 @@ export const PdfViewerEditor: React.FC<WidgetEditorProps> = ({
 
     return <>
         <embed
-        className="pdf"
+        className="pdf-viewer-pdf"
         src={pdfLink}
         type="application/pdf"
         style={{
@@ -33,7 +33,7 @@ export const PdfViewerEditor: React.FC<WidgetEditorProps> = ({
         <h3>PDF Link</h3>
         <input type="text" onChange={(e) => setEditedContentOnChange("pdfViewer_pdfLink", e.target.value)} />
         <h3>PDF Width Percentage</h3>
-        <input type="text" onChange={(e) => setEditedContentOnChange("pdfViewer_pdfWidthPercentage", Number(e.target.value))} />
+        <input type="text" onChange={(e) => setEditedContentOnChange("pdfViewer_pdfWidthPercentage", Math.min(100, Number(e.target.value)))} />
         <h3>PDF Height in Pixels</h3>
         <input type="text" onChange={(e) => setEditedContentOnChange("pdfViewer_pdfHeightPixel", Number(e.target.value))} />
     </>;
