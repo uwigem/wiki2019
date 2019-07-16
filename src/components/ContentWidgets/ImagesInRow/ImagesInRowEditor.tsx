@@ -6,7 +6,8 @@ import { Button, TextField } from '@material-ui/core';
 type imgRowItem = {
     imgLink: string;
     imgCaption: string;
-    extLink: string;
+    imgAltTag: string;
+    externalLink_OnImageClick: string;
 }
 
 /**
@@ -14,7 +15,7 @@ type imgRowItem = {
  *
  * Last Modified
  * Nitesh Chetry
- * July 14, 2019
+ * July 15, 2019
  */
 export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
     editedContent,
@@ -22,44 +23,124 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
 }) => {
     const [imgLinkText, changeImgLinkText] = useState("");
     const [imgCaptionText, changeCaptionText] = useState("");
-    const [extLinkText, changeExtLinkText] = useState("");
+    const [imgAltTagText, changeImgAltTagText] = useState("");
+    const [externalLink_OnImageClickText, changeExternalLink_OnImageClickText] = useState("");
+    const [emptyImgLinkSubmitted, switchEmptyImgLinkSubmitted] = useState(false);
+    const [emptyCaptionAndAltTagSubmitted, switchEmptyCaptionAndAltTagSubmitted] = useState(false);
     let pictureCaptionPairs: imgRowItem[] = editedContent.imagesInRow_items || [];
     if (!pictureCaptionPairs) {
         return <></>;
     }
     return <>
         <h3> Add New Image </h3>
-        <TextField
-            fullWidth
-            label="Image Link"
-            className="text-field"
-            value={imgLinkText}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                changeImgLinkText(e.target.value);
-            }}
-            variant="outlined"
-            margin="dense"
-        />
-        <TextField
-            fullWidth
-            label="Caption"
-            className="text-field"
-            value={imgCaptionText}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                changeCaptionText(e.target.value);
-            }}
-            variant="outlined"
-            margin="dense"
-            multiline
-        />
+        {emptyImgLinkSubmitted ? (
+            <React.Fragment>
+                <h4 className="error-message"> Image Link must not be empty</h4>
+                <TextField
+                    error
+                    required
+                    fullWidth
+                    label="Image Link"
+                    className="text-field"
+                    value={imgLinkText}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        changeImgLinkText(e.target.value);
+                    }}
+                    variant="outlined"
+                    margin="dense"
+                    multiline
+                />
+            </React.Fragment>
+        ) : (
+                <TextField
+                    fullWidth
+                    required
+                    label="Image Link"
+                    className="text-field"
+                    value={imgLinkText}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        changeImgLinkText(e.target.value);
+                    }}
+                    variant="outlined"
+                    margin="dense"
+                    multiline
+                />
+            )
+        }
+        {emptyCaptionAndAltTagSubmitted ? (
+            <React.Fragment>
+                <h4 className="error-message">
+                    Either Caption or Alternative Text must not be empty
+                </h4>
+                <TextField
+                    error
+                    fullWidth
+                    label="Caption"
+                    className="text-field"
+                    value={imgCaptionText}
+                    onChange={
+                        (e: React.ChangeEvent<HTMLInputElement>) => {
+                            changeCaptionText(e.target.value);
+                        }}
+                    variant="outlined"
+                    margin="dense"
+                    multiline
+                />
+                <TextField
+                    error
+                    fullWidth
+                    label="Alternative Text"
+                    helperText="Describes image for vision-impaired users (defaults to caption)"
+                    className="text-field"
+                    value={imgAltTagText}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        changeImgAltTagText(e.target.value);
+                    }}
+                    variant="outlined"
+                    margin="dense"
+                    multiline
+                />
+            </React.Fragment>
+        ) : (
+                <React.Fragment>
+                    <TextField
+                        fullWidth
+                        label="Caption"
+                        className="text-field"
+                        value={imgCaptionText}
+                        onChange={
+                            (e: React.ChangeEvent<HTMLInputElement>) => {
+                                changeCaptionText(e.target.value);
+                            }}
+                        variant="outlined"
+                        margin="dense"
+                        multiline
+                    />
+                    <TextField
+                        fullWidth
+                        label="Alternative Text"
+                        helperText="Describes image for vision-impaired users (defaults to caption)"
+                        className="text-field"
+                        value={imgAltTagText}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            changeImgAltTagText(e.target.value);
+                        }}
+                        variant="outlined"
+                        margin="dense"
+                        multiline
+                    />
+                </React.Fragment>
+            )
+        }
+
         <TextField
             fullWidth
             label="External Link"
             helperText="defaults to image link"
             className="text-field"
-            value={extLinkText}
+            value={externalLink_OnImageClickText}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                changeExtLinkText(e.target.value);
+                changeExternalLink_OnImageClickText(e.target.value);
             }}
             variant="outlined"
             margin="dense"
@@ -69,18 +150,32 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
             variant="outlined"
             color="primary"
             onClick={e => {
-                pictureCaptionPairs.push({
-                    imgLink: imgLinkText,
-                    imgCaption: imgCaptionText,
-                    extLink: extLinkText
-                });
-                setEditedContentOnChange(
-                    "imagesInRow_items",
-                    pictureCaptionPairs
-                );
-                changeImgLinkText("");
-                changeCaptionText("");
-                changeExtLinkText("");
+                if (imgLinkText === "") {
+                    switchEmptyImgLinkSubmitted(true);
+                } else {
+                    switchEmptyImgLinkSubmitted(false);
+                }
+                if (imgCaptionText === "" && imgAltTagText === "") {
+                    switchEmptyCaptionAndAltTagSubmitted(true);
+                } else {
+                    switchEmptyCaptionAndAltTagSubmitted(false);
+                }
+                if (imgLinkText !== "" && (imgCaptionText !== "" || imgAltTagText !== "")) {
+                    pictureCaptionPairs.push({
+                        imgLink: imgLinkText,
+                        imgCaption: imgCaptionText,
+                        imgAltTag: imgAltTagText,
+                        externalLink_OnImageClick: externalLink_OnImageClickText
+                    });
+                    setEditedContentOnChange(
+                        "imagesInRow_items",
+                        pictureCaptionPairs
+                    );
+                    changeImgLinkText("");
+                    changeCaptionText("");
+                    changeImgAltTagText("");
+                    changeExternalLink_OnImageClickText("");
+                }
             }}
         >
             Add Image
@@ -89,10 +184,16 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
         <div className="img-row">
             {pictureCaptionPairs.map((pair: imgRowItem, index: number) => (
                 <div className="img-row-item">
-                    <a href={pair.extLink ? pair.extLink : pair.imgLink}>
-                        <img src={pair.imgLink} alt={"image" + index} />
-                    </a>
-                    <p>{pair.imgCaption}</p>
+                    <figure>
+                        <a href={pair.externalLink_OnImageClick ? pair.externalLink_OnImageClick :
+                            pair.imgLink}
+                        >
+                            <img src={pair.imgLink} alt={pair.imgAltTag ? pair.imgAltTag :
+                                pair.imgCaption}
+                            />
+                            <figcaption>{pair.imgCaption}</figcaption>
+                        </a>
+                    </figure>
                     <Button
                         variant="outlined"
                         onClick={() => {

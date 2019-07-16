@@ -1,3 +1,7 @@
+.error-message {
+    color: red;
+}
+
 .img-row {
     display: flex;
     margin: 0px 30px;
@@ -29,5 +33,6 @@ img {
 }
 
 figcaption {
+    color: black;
     padding: 5px;
 }

@@ -6,7 +6,8 @@ export type ContentSingularData = {
         {
             imgLink: string
             imgCaption: string
-            extLink: string
+            imgAltTag: string
+            externalLink_OnImageClick: string
         }
     ]
     [idx: string]: any
