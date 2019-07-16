@@ -9,11 +9,28 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe("App component", () => {
     it("Mounts correctly", () => {
-        const wrapper = mount(<App IEOREDGE={true} currYear={2019} firebase={null} ContentEditor={() => <></>} />);
-        // console.log(wrapper.invoke);
-        // console.log(wrapper.invoke('a'))
-    })
-})
+        mount(<App IEOREDGE={true}
+            currYear={2019}
+            firebase={null}
+            ContentEditor={() => <></>} />);
+    });
+
+    /** 
+     * We cannot test debug header when not on localhost because setting the url
+     * does not work correctly.
+     */
+    it("Shows a debug header when the route is localhost", () => {
+        const wrapper = mount(<App IEOREDGE={true}
+            currYear={2019}
+            firebase={null}
+            ContentEditor={() => <></>} />);
+        expect(wrapper.find("DebugHeader").length).toEqual(1);
+    });
+
+
+});
+
+
 
 // describe('<ConceptCard /> component', () => {
 //     const generateExercise = jest.fn()
