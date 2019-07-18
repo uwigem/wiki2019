@@ -2,13 +2,13 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import App from '../App';
+import App from './App';
 
 // configure enzyme to work with React version 16
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("App component", () => {
-    it("Mounts correctly", () => {
+    it("mounts correctly", () => {
         mount(<App IEOREDGE={true}
             currYear={2019}
             firebase={null}
@@ -19,7 +19,7 @@ describe("App component", () => {
      * We cannot test debug header when not on localhost because setting the url
      * does not work correctly.
      */
-    it("Shows a debug header when the route is localhost", () => {
+    it("shows a debug header when the route is localhost", () => {
         const wrapper = mount(<App IEOREDGE={true}
             currYear={2019}
             firebase={null}
