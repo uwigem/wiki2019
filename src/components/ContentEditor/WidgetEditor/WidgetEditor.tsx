@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -7,10 +7,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import './WidgetEditor.css';
 import { WidgetTypes, ContentMapping } from '../../ContentMapping/ContentMapping';
-import firebase from 'firebase/app';
-import 'firebase/database';
 import { HistoryTypes } from '../../_debug/EditorHistory';
 import equal from 'deep-equal';
+import { EnvironmentContext } from '../../../contexts/EnvironmentContext/EnvironmentContext';
 
 type WidgetEditorProps = {
     content: ContentSingularData | undefined,
@@ -24,6 +23,10 @@ type WidgetEditorProps = {
  * WidgetEditor is the widget editing component. It handles the logic for editing a single widget,
  * updating it, and rendering it. 
  * 
+ * Last Modified
+ * July 17, 2019
+ * William Kwok
+ * 
  * TODO:
  *  - Update the selector to be more user friendly (make a thing popup?)
  *  - Current it is not user friendly to benefit development
@@ -35,6 +38,7 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
     pageToEdit, user }) => {
     const [editing, setEditing] = useState<boolean>(false);
     const [editedContent, setEditedContent] = useState<ContentSingularData>({ ...content } as ContentSingularData);
+    const { firebase } = useContext(EnvironmentContext);
 
     useEffect(() => {
         if (!equal(content, editedContent)) {
@@ -43,7 +47,7 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
     }, [content])
 
 
-    if (!content) {
+    if (!content || !firebase) {
         return <></>;
     }
 

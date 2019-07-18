@@ -3,8 +3,9 @@ import Data, { ContentData } from './components/_data/Data';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { DebugHeader } from './components/_debug/DebugHeader/DebugHeader';
 import { Footbar } from './components/Footbar/Footbar';
+import { ContentEditorProps } from './components/ContentEditor/ContentEditor';
+import { EnvironmentContext } from './contexts/EnvironmentContext/EnvironmentContext';
 import { useWindowWidth } from './hooks/useWindowWidth';
-import { WindowWidthContext } from './contexts/WindowWidthContext';
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen';
 import { CustomAppBar } from './components/CustomAppBar/CustomAppBar';
 import { DebugFonts } from './components/_debug/DebugFonts';
@@ -13,7 +14,6 @@ import "./App.css";
 // comment out for production build
 // import 'firebase/auth';
 // import 'firebase/database';
-import { ContentEditorProps } from './components/ContentEditor/ContentEditor';
 
 
 // This line is to remove a bug that Firefox has
@@ -33,7 +33,7 @@ const debugURL = "/Editor";
  * 
  * Last Modified
  * William Kwok
- * June 16, 2019
+ * July 17, 2019
  */
 const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }) => {
     const [loading, setLoading] = useState<boolean>(true);
@@ -144,7 +144,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
     }
 
     return <div className="App">
-        <WindowWidthContext.Provider value={{ windowWidth }}>
+        <EnvironmentContext.Provider value={{ windowWidth, firebase }}>
             <MuiThemeProvider theme={theme}>
                 {debugMode && <>
                     <DebugHeader />
@@ -190,7 +190,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
                 {loading &&
                     <LoadingScreen />}
             </MuiThemeProvider>
-        </WindowWidthContext.Provider>
+        </EnvironmentContext.Provider>
     </div>
 }
 
