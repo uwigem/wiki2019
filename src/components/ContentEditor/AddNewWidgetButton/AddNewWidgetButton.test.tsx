@@ -24,5 +24,6 @@ describe("AddNewWidgetButton component", () => {
         expect(fakeClick.mock.calls.length).toEqual(0);
         wrapper.find("button").simulate("click");
         expect(fakeClick.mock.calls.length).toEqual(1);
+        expect(false).toBe(true);
     });
 })
