@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<title>iGem Wiki Component Picker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+    .container {
+        width: 100%;
+    }
+    .wiki-form {
+        max-width: 500px;
+        background: #f4f7f8;
+        margin: 10px auto;
+        padding: 20px;
+        border-radius: 8px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .wiki-form fieldset {
+        border: none;
+        padding: 0px;
+        margin: 0px;
+    }
+    .wiki-form legend {
+        font-size: 1.8em;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-top: 10px;
+        text-align: center;
+    }
+    .wiki-form label {
+        display: block;
+        margin-bottom: 8px;
+    }
+    .wiki-form input[type="text"],
+    .wiki-form input[type="date"],
+    .wiki-form input[type="datetime"],
+    .wiki-form input[type="email"],
+    .wiki-form input[type="search"],
+    .wiki-form input[type="time"],
+    .wiki-form input[type="url"],
+    .wiki-form textarea,
+    .wiki-form select {
+        font-family: Arial, Helvetica, sans-serif;
+        background: rgba(255, 255, 255, .1);
+        border: none;
+        border-radius: 4px;
+        font-size: 15px;
+        margin: 0;
+        outline: 0;
+        padding: 0px 10px;
+        width: 100%;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        background-color: #e8eeef;
+        color: #555555;
+        -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+        margin-bottom: 16px;
+    }
+    .wiki-form input[type="text"]:focus,
+    .wiki-form input[type="date"]:focus,
+    .wiki-form input[type="datetime"]:focus,
+    .wiki-form input[type="email"]:focus,
+    .wiki-form input[type="search"]:focus,
+    .wiki-form input[type="time"]:focus,
+    .wiki-form input[type="url"]:focus,
+    .wiki-form textarea:focus,
+    .wiki-form select:focus {
+        background: #d2d9dd;
+    }
+    .wiki-form select {
+        -webkit-appearance: menulist-button;
+        height: 35px;
+    }
+    .wiki-form input[type="submit"],
+    .wiki-form input[type="button"] {
+        position: relative;
+        display: block;
+        padding: 15px 39px 14px 39px;
+        color: #FFF;
+        background: #531abc;
+        font-size: 18px;
+        text-align: center;
+        font-style: normal;
+        width: 100%;
+        border: 1px solid #2a0d61;
+        border-width: 1px 1px 3px;
+        margin-bottom: 16px;
+    }
+    .wiki-form input[type="submit"]:hover,
+    .wiki-form input[type="button"]:hover {
+        background: #40168d;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="wiki-form">
+            <form>
+                <fieldset>
+                    <legend>Add a Widget</legend>
+                    <select id="widget" name="widget-type">
+                        <option value="" disabled selected>-- Select a Widget --</option>
+                        <optgroup label="Display">
+                            <option value="accordion">Accordion</option>
+                            <option value="separator">Separator</option>
+                            <option value="splitview">Splitview</option>
+                            <option value="tab">Tab</option>
+                        </optgroup>
+                        <optgroup label="Media">
+                            <option value="gallery">Gallery</option>
+                            <option value="images-in-row">Images in a Row</option>
+                            <option value="pdf">PDF</option>
+                            <option value="video">Video</option>
+                        </optgroup>
+                    </select>
+                </fieldset>
+                <input type="submit" value="Add" />
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
