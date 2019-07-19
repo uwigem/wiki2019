@@ -182,9 +182,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 
                         {/*****************************************/}
                         {pageTitle !== "/Editor" && pageTitle !== "" &&
-                            <div>
-                                <ContentView contentData={contentData} pageTitle={pageTitle} />
-                            </div>
+                            <ContentView contentData={contentData} pageTitle={pageTitle} />
                         }
                     </div>
                     <Footbar a={a} />
