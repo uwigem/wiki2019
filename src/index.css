@@ -3,6 +3,7 @@
     --mainColor: black;
     --debugHeaderColor: gray;
     --backgroundColor: rgb(245, 245, 245);
+    --errorMessageColor: red;
 }
 
 a {

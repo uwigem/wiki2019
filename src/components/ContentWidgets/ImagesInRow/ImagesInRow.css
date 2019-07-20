@@ -1,5 +1,5 @@
 .error-message {
-    color: red;
+    color: var(--errorMessageColor);
 }
 
 .img-row {
@@ -12,6 +12,11 @@
     margin: 10px 0px 0px;
     padding: 0px 8px;
     text-align: center;
+}
+
+.img-row-caption {
+    color: black;
+    padding: 5px;
 }
 
 @media (max-width: 785px) {
@@ -30,9 +35,4 @@ img {
     object-fit: cover;
     margin: auto auto 10px;
     display: block;
-}
-
-figcaption {
-    color: black;
-    padding: 5px;
 }
