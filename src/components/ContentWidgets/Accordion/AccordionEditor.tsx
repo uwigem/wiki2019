@@ -1,34 +1,46 @@
 import React from 'react';
 import { WidgetEditorProps } from '../../ContentMapping/ContentMapping';
+import { Accordion } from './Accordion';
 
 export const AccordionEditor: React.FC<WidgetEditorProps> = ({
     editedContent,
     setEditedContentOnChange
 }) => {
+    const emptySection = {
+        title: "",
+        panel: ""
+    }
+    const accordionContent = editedContent.accordion_content || [emptySection];
+    
     const addAccordionSection = (index: number) => {
-
+        let newAccordion = accordionContent.slice(0, index);
+        newAccordion.push(emptySection);
+        newAccordion = newAccordion.concat(accordionContent.slice(index));
+        setEditedContentOnChange("accordion_content", newAccordion);
     };
 
-    const updateTitle = (s: string, index: number) => {
+    const deleteAccordionSection = (index: number) => {
+        let newAccordion = accordionContent.slice(0);
+        newAccordion.splice(index, 1);
+        setEditedContentOnChange("accordion_content", newAccordion);
+    }
 
+    const updateTitle = (s: string, index: number) => {
+        let newAccordion = accordionContent.slice(0);;
+        newAccordion[index].title = s;
+        setEditedContentOnChange("accordion_content", newAccordion);
     };
 
     const updatePanel = (s: string, index: number) => {
-
+        let newAccordion = accordionContent.slice(0);;
+        newAccordion[index].panel = s;
+        setEditedContentOnChange("accordion_content", newAccordion);
     };
 
-    if (!editedContent.accordion_content) {
-        return <div className="accorsion-section">
-            <button 
-                className="accordion-add-new-button"
-                onClick={() => addAccordionSection(0)}
-            >+</button>
-        </div>
-    }
-    const accordiondContent = editedContent.accordion_content;
     return <> 
-        {accordiondContent.map((section, index) => {
-            return <div className="accorsion-section">
+        <Accordion accordion_content={accordionContent}></Accordion>
+        {accordionContent.map((section, index) => {
+            return <div className="accordion-editor">
                 <button 
                     className="accordion-add-new-button"
                     onClick={() => addAccordionSection(index)}
@@ -39,18 +51,23 @@ export const AccordionEditor: React.FC<WidgetEditorProps> = ({
                     value={section.title? section.title : ""}
                     onChange={(e) => updateTitle(e.target.value, index)}
                 ></input>
-                <input
-                    type="text"
+                <button 
+                    className="accordion-delete-button"
+                    onClick={() => deleteAccordionSection(index)}
+                >-</button>
+                <textarea
                     className="accordion-panel-input"
+                    rows={20}
                     value={section.panel? section.panel : ""}
                     onChange={(e) => updatePanel(e.target.value, index)}
-                ></input>
+                ></textarea>
+    
             </div>
         })}
-        <div className="accordion-section">
+        <div className="accordion-editor">
             <button 
                 className="accordion-add-new-button"
-                onClick={() => addAccordionSection(accordiondContent.length)}
+                onClick={() => addAccordionSection(accordionContent.length)}
             >+</button>
         </div>
     </>
