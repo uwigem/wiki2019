@@ -1,8 +1,11 @@
 import React from 'react';
 import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { AccordinEditor } from './AccordionEditor';
 
-describe("section name", () => {
+Enzyme.configure({ adapter: new Adapter() });
+
+describe("accordion editor", () => {
     it("single test", () => {
     });
 });

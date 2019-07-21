@@ -61,7 +61,6 @@ export const AccordionEditor: React.FC<WidgetEditorProps> = ({
                     value={section.panel? section.panel : ""}
                     onChange={(e) => updatePanel(e.target.value, index)}
                 ></textarea>
-    
             </div>
         })}
         <div className="accordion-editor">

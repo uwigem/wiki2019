@@ -4,7 +4,7 @@ import { ContentSingularData } from '../../_data/ContentSingularData';
 import './Accordion.css';
 
 /**
- * Accordion is a collapsible list
+ * Accordion is a collapsible list of titles and coorisponding content
  * 
  * Last Modified
  * Jennifer Tao
@@ -13,7 +13,7 @@ import './Accordion.css';
 export const Accordion: React.FC<ContentSingularData> = ({
     accordion_content
 }) => {
-    if (!accordion_content) {
+    if (!accordion_content || accordion_content.length) {
         return <></>
     }
 
