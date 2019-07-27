@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { detect } from 'detect-browser';
+import { ContentEditor } from './components/ContentEditor/ContentEditor';
 
 /**
  * Index handles configuration as well as being the main injection point for the application
  * 
  * Last Modified
  * William Kwok
- * June 16, 2019
+ * July 17, 2019
  */
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,7 +19,10 @@ import { detect } from 'detect-browser';
 
 // COMMENT/UNCOMMENT BELOW TO ENABLE OR DISABLE FIREBASE TO THE PROJECT
 import firebase from 'firebase';
+import 'firebase/app'
 import 'firebase/messaging';
+import 'firebase/database';
+import 'firebase/auth';
 const firebaseConfig = {
     apiKey: "AIzaSyBkr6jirFdzkMofucO2z_KzN13hMDeWkVI",
     authDomain: "uwigem-wikis.firebaseapp.com",
@@ -29,6 +33,7 @@ const firebaseConfig = {
     appId: "1:131891776719:web:0bf2382aec94dcdf"
 };
 firebase.initializeApp(firebaseConfig);
+// let firebase = null;
 // firebase.auth().signInWithPopup(provider);
 
 // ENTER THE CURRENT iGEM SEASON YEAR AS IN THE iGEM WIKI LINK (eg 2019.igem.org)
@@ -96,4 +101,4 @@ http://${year}.igem.org/Team:Washington.`)
  * In the future, you may want to change this prop to the browser name instead, or extend it to
  * work with browsers that are behind, such as Safari.
  */
-ReactDOM.render(<App IEOREDGE={IEOREDGE} currYear={currYear} />, document.getElementById('root'));
+ReactDOM.render(<App IEOREDGE={IEOREDGE} currYear={currYear} firebase={firebase} ContentEditor={ContentEditor} />, document.getElementById('root'));
