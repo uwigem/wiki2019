@@ -54,7 +54,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
         {emptyImgLinkSubmitted ?
             <>
                 <h4 className="error-message"> Image Link must not be empty</h4>
-                <TextField /** image link text field with reminder for user to add image link */
+                {/** image link text field following empty input */}<TextField
                     error
                     required
                     fullWidth
@@ -69,26 +69,28 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                     multiline
                 />
             </> :
-            <TextField /** default image link text field */
-                fullWidth
-                required
-                label="Image Link"
-                className="text-field"
-                value={imgLinkText}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    changeImgLinkText(e.target.value);
-                }}
-                variant="outlined"
-                margin="dense"
-                multiline
-            />
+            <>
+                {/** default image link text field */}<TextField
+                    fullWidth
+                    required
+                    label="Image Link"
+                    className="text-field"
+                    value={imgLinkText}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        changeImgLinkText(e.target.value);
+                    }}
+                    variant="outlined"
+                    margin="dense"
+                    multiline
+                />
+            </>
         }
         {emptyCaptionAndAltTagSubmitted ?
             <>
                 <h4 className="error-message">
                     Either Caption or Alternative Text must not be empty
                 </h4>
-                <TextField /** caption text field with reminder for user to add caption */
+                {/** caption text field following invalid input */}<TextField
                     error
                     fullWidth
                     label="Caption"
@@ -102,7 +104,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                     margin="dense"
                     multiline
                 />
-                <TextField /** alt text field with reminder for user to add alt text */
+                {/** alt text field following invalid input */}<TextField
                     error
                     fullWidth
                     label="Alternative Text"
@@ -118,7 +120,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                 />
             </> :
             <>
-                <TextField /** default caption text field */
+                {/** default caption text field */}<TextField
                     fullWidth
                     label="Caption"
                     className="text-field"
@@ -131,7 +133,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                     margin="dense"
                     multiline
                 />
-                <TextField /** default alt text field */
+                {/** default alt text field */}<TextField
                     fullWidth
                     label="Alternative Text"
                     helperText="Describes image for vision-impaired users (defaults to caption)"
@@ -146,7 +148,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                 />
             </>
         }
-        <TextField /** text field for user to add external link when image or caption is clicked */
+        {/** external link text field on opened on image or caption click*/}<TextField
             fullWidth
             label="External Link"
             helperText="defaults to image link"
