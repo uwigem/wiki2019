@@ -2,7 +2,7 @@ import React from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
 import './ImagesInRow.css';
 
-type imgRowItem = {
+type ImgRowItem = {
     imgLink: string;
     imgCaption: string;
     imgAltTag: string;
@@ -14,7 +14,7 @@ type imgRowItem = {
  *
  * Last Modified
  * Nitesh Chetry
- * July 19, 2019
+ * July 26, 2019
  */
 export const ImagesInRow: React.FC<ContentSingularData> = ({
     imagesInRow_items
@@ -24,7 +24,7 @@ export const ImagesInRow: React.FC<ContentSingularData> = ({
     }
     return <>
         <div className="img-row">
-            {imagesInRow_items.map((pair: imgRowItem, index: number) => (
+            {imagesInRow_items.map((pair: ImgRowItem, index: number) => (
                 <div className="img-row-item">
                     <figure>
                         <a href={pair.externalLink ? pair.externalLink : pair.imgLink} >

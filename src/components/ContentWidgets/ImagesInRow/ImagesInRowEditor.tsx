@@ -3,7 +3,7 @@ import { WidgetEditorProps } from '../../ContentMapping/ContentMapping';
 import './ImagesInRow.css';
 import { Button, TextField } from '@material-ui/core';
 
-type imgRowItem = {
+type ImgRowItem = {
     imgLink: string;
     imgCaption: string;
     imgAltTag: string;
@@ -15,7 +15,7 @@ type imgRowItem = {
  *
  * Last Modified
  * Nitesh Chetry
- * July 19, 2019
+ * July 26, 2019
  */
 export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
     editedContent,
@@ -27,7 +27,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
     const [externalLink, changeExternalLink] = useState("");
     const [emptyImgLinkSubmitted, switchEmptyImgLinkSubmitted] = useState(false);
     const [emptyCaptionAndAltTagSubmitted, switchEmptyCaptionAndAltTagSubmitted] = useState(false);
-    let pictureCaptionPairs: imgRowItem[] = editedContent.imagesInRow_items || [];
+    let pictureCaptionPairs: ImgRowItem[] = editedContent.imagesInRow_items || [];
 
     const addImage = (imgLinkText: string, imgCaptionText: string, imgAltTagText: string,
         externalLink: string) => {
@@ -54,7 +54,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
         {emptyImgLinkSubmitted ?
             <>
                 <h4 className="error-message"> Image Link must not be empty</h4>
-                <TextField
+                <TextField /** image link text field with reminder for user to add image link */
                     error
                     required
                     fullWidth
@@ -69,7 +69,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                     multiline
                 />
             </> :
-            <TextField
+            <TextField /** default image link text field */
                 fullWidth
                 required
                 label="Image Link"
@@ -88,7 +88,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                 <h4 className="error-message">
                     Either Caption or Alternative Text must not be empty
                 </h4>
-                <TextField
+                <TextField /** caption text field with reminder for user to add caption */
                     error
                     fullWidth
                     label="Caption"
@@ -102,7 +102,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                     margin="dense"
                     multiline
                 />
-                <TextField
+                <TextField /** alt text field with reminder for user to add alt text */
                     error
                     fullWidth
                     label="Alternative Text"
@@ -118,7 +118,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                 />
             </> :
             <>
-                <TextField
+                <TextField /** default caption text field */
                     fullWidth
                     label="Caption"
                     className="text-field"
@@ -131,7 +131,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                     margin="dense"
                     multiline
                 />
-                <TextField
+                <TextField /** default alt text field */
                     fullWidth
                     label="Alternative Text"
                     helperText="Describes image for vision-impaired users (defaults to caption)"
@@ -146,7 +146,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                 />
             </>
         }
-        <TextField
+        <TextField /** text field for user to add external link when image or caption is clicked */
             fullWidth
             label="External Link"
             helperText="defaults to image link"
@@ -172,7 +172,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
         </Button>
         <h3> Preview </h3>
         <div className="img-row">
-            {pictureCaptionPairs.map((pair: imgRowItem, index: number) => (
+            {pictureCaptionPairs.map((pair: ImgRowItem, index: number) => (
                 <div className="img-row-item">
                     <figure>
                         <a href={pair.externalLink ? pair.externalLink : pair.imgLink} >
