@@ -1,14 +1,10 @@
 import { WidgetTypes } from '../ContentMapping/ContentMapping';
+import { ImgRowItem } from '../ContentWidgets/ImagesInRow/ImagesInRow';
 
 export type ContentSingularData = {
     plainText_content?: string
     exampleImage_imageLink?: string
     exampleImage_percentageSize?: number
-    imagesInRow_items?: {
-        imgLink: string
-        imgCaption: string
-        imgAltTag: string
-        externalLink: string
-    }[]
+    imagesInRow_items?: ImgRowItem[]
     [idx: string]: any
 }

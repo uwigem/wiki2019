@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import { WidgetEditorProps } from '../../ContentMapping/ContentMapping';
 import './ImagesInRow.css';
 import { Button, TextField } from '@material-ui/core';
-
-type ImgRowItem = {
-    imgLink: string;
-    imgCaption: string;
-    imgAltTag: string;
-    externalLink: string;
-}
+import { ImgRowItem } from './ImagesInRow';
 
 /**
  * Diplays an editor to create/edit an ImageInRow widget
@@ -175,10 +169,10 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
         <h3> Preview </h3>
         <div className="img-row">
             {pictureCaptionPairs.map((pair: ImgRowItem, index: number) => (
-                <div className="img-row-item">
+                <div className="img-row-item" key={index}>
                     <figure>
                         <a href={pair.externalLink ? pair.externalLink : pair.imgLink} >
-                            <img src={pair.imgLink} alt={pair.imgAltTag ? pair.imgAltTag :
+                            <img className="img-row-image" src={pair.imgLink} alt={pair.imgAltTag ? pair.imgAltTag :
                                 pair.imgCaption}
                             />
                             <figcaption className="img-row-caption">{pair.imgCaption}</figcaption>

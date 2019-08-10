@@ -26,7 +26,7 @@
     }
 }
 
-img {
+.img-row-image {
     width: 100%;
     max-width: 400px;
     min-width: 160px;
