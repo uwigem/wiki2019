@@ -1,42 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactMarkdown from 'react-markdown';
 import { ContentSingularData } from '../../_data/ContentSingularData';
 import './Accordion.css';
 
 /**
- * Accordion is a collapsible list of titles and coorisponding content
+ * Accordion is a collapsible list of titles and cooresponding content
  * 
  * Last Modified
  * Jennifer Tao
- * July 21, 2019
+ * Auguest 10, 2019
  */
+export type accordionPageProps = {
+    title: string, 
+    panel: string
+}
+
+export const AccordionPage: React.FC<accordionPageProps> = ({
+    title,
+    panel
+}) => {
+    const [isActive, setCollapseState] = useState(false);
+    return <div className={isActive? "active-accordion" : ""}>
+        <button
+            className="accordion-title"
+            onClick={() => setCollapseState(!isActive)}
+        >{title}</button>
+        <div className="accordion-panel">
+            <ReactMarkdown source={panel} />
+        </div>
+    </div>
+}
+
 export const Accordion: React.FC<ContentSingularData> = ({
     accordion_content
 }) => {
-    if (!accordion_content || accordion_content.length) {
+    if (!accordion_content) {
         return <></>
     }
 
-    const collapsePanel = (e: any) => {
-        const par = e.target.parentNode;
-        if (par.className === "active-accordion") {
-            par.className = "";
-        } else {
-            par.className = "active-accordion";
-        }
-    }
-
     return <>
-        {accordion_content.map((section, index) => {
-            return <div>
-                <button 
-                    className="accordion-title"
-                    onClick={(e) => collapsePanel(e)}
-                >{section.title}</button>
-                <div className="accordion-panel">
-                    <ReactMarkdown source={section.panel} />
-                </div>
-            </div>
+        {accordion_content.map((section) => {
+            return <AccordionPage 
+                title={section.title}
+                panel={section.panel}
+            ></AccordionPage>
         })}
     </>
 }
