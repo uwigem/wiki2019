@@ -1,9 +1,9 @@
 :root {
-    --headerTagColor: black;
-    --mainColor: black;
-    --debugHeaderColor: gray;
-    --backgroundColor: rgb(245, 245, 245);
-    --errorMessageColor: red;
+    --header-tag-color: black;
+    --main-color: black;
+    --debug-headercolor: gray;
+    --background-color: rgb(245, 245, 245);
+    --error-message-color: red;
 }
 
 a {
