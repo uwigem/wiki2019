@@ -15,7 +15,9 @@ export type WidgetEditorProps = {
 type ContentMappingType = {
     [idx: string]: {
         widget: React.FC<ContentSingularData>,
-        editor: React.FC<WidgetEditorProps>
+        editor: React.FC<WidgetEditorProps>,
+        displayName: string,
+        widgetCategory: "Display" | "Media" | "Text"
     }
 }
 
@@ -28,14 +30,20 @@ export enum WidgetTypes {
 export const ContentMapping: ContentMappingType = {
     PLAIN_TEXT: {
         widget: PlainText,
-        editor: PlainTextEditor
+        editor: PlainTextEditor,
+        displayName: "Plain Text",
+        widgetCategory: "Text"
     },
     STUB: {
         widget: Stub,
-        editor: StubEditor
+        editor: StubEditor,
+        displayName: "Stub",
+        widgetCategory: "Display"
     },
     EXAMPLE_IMAGE: {
         widget: ExampleImage,
-        editor: ExampleImageEditor
+        editor: ExampleImageEditor,
+        displayName: "Example Image",
+        widgetCategory: "Media"
     }
 }
