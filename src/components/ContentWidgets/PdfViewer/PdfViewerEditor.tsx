@@ -31,10 +31,10 @@ export const PdfViewerEditor: React.FC<WidgetEditorProps> = ({
         }} />
         <br />
         <h3>PDF Link</h3>
-        <input type="text" onChange={(e) => setEditedContentOnChange("pdfViewer_pdfLink", e.target.value)} />
+        <input type="text" value={pdfLink} onChange={(e) => setEditedContentOnChange("pdfViewer_pdfLink", e.target.value)} />
         <h3>PDF Width Percentage</h3>
-        <input type="text" onChange={(e) => setEditedContentOnChange("pdfViewer_pdfWidthPercentage", Math.min(100, Number(e.target.value)))} />
+        <input type="text" value={pdfWidthPercentage} onChange={(e) => setEditedContentOnChange("pdfViewer_pdfWidthPercentage", Math.min(100, Number(e.target.value)))} />
         <h3>PDF Height in Pixels</h3>
-        <input type="text" onChange={(e) => setEditedContentOnChange("pdfViewer_pdfHeightPixel", Number(e.target.value))} />
+        <input type="text" value={pdfHeightPixel} onChange={(e) => setEditedContentOnChange("pdfViewer_pdfHeightPixel", Number(e.target.value))} />
     </>;
 }
