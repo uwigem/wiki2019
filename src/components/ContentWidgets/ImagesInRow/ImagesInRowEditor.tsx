@@ -40,29 +40,70 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
         }
     }
 
+    const renderEmptyImageLinkError = () => {
+        return <>
+            <h4 className="error-message"> Image Link must not be empty</h4>
+            {/** image link text field following empty input */}<TextField
+                error
+                required
+                fullWidth
+                label="Image Link"
+                className="text-field"
+                value={imgLinkText}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    changeImgLinkText(e.target.value);
+                }}
+                variant="outlined"
+                margin="dense"
+                multiline
+            />
+        </>
+    }
+
+    const renderEmptyCaptionOrAltTextError = () => {
+        return <>
+            <h4 className="error-message">
+                Either Caption or Alternative Text must not be empty
+            </h4>
+            {/** caption text field following invalid input */}<TextField
+                error
+                fullWidth
+                label="Caption"
+                className="text-field"
+                value={imgCaptionText}
+                onChange={
+                    (e: React.ChangeEvent<HTMLInputElement>) => {
+                        changeCaptionText(e.target.value);
+                    }}
+                variant="outlined"
+                margin="dense"
+                multiline
+            />
+            {/** alt text field following invalid input */}<TextField
+                error
+                fullWidth
+                label="Alternative Text"
+                helperText="Describes image for vision-impaired users (defaults to caption)"
+                className="text-field"
+                value={imgAltTagText}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    changeImgAltTagText(e.target.value);
+                }}
+                variant="outlined"
+                margin="dense"
+                multiline
+            />
+        </>
+    }
+
+
     if (!pictureCaptionPairs) {
         return <></>;
     }
     return <>
         <h3> Add New Image </h3>
         {emptyImgLinkSubmitted ?
-            <>
-                <h4 className="error-message"> Image Link must not be empty</h4>
-                {/** image link text field following empty input */}<TextField
-                    error
-                    required
-                    fullWidth
-                    label="Image Link"
-                    className="text-field"
-                    value={imgLinkText}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        changeImgLinkText(e.target.value);
-                    }}
-                    variant="outlined"
-                    margin="dense"
-                    multiline
-                />
-            </> :
+            renderEmptyImageLinkError() :
             <>
                 {/** default image link text field */}<TextField
                     fullWidth
@@ -80,39 +121,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
             </>
         }
         {emptyCaptionAndAltTagSubmitted ?
-            <>
-                <h4 className="error-message">
-                    Either Caption or Alternative Text must not be empty
-                </h4>
-                {/** caption text field following invalid input */}<TextField
-                    error
-                    fullWidth
-                    label="Caption"
-                    className="text-field"
-                    value={imgCaptionText}
-                    onChange={
-                        (e: React.ChangeEvent<HTMLInputElement>) => {
-                            changeCaptionText(e.target.value);
-                        }}
-                    variant="outlined"
-                    margin="dense"
-                    multiline
-                />
-                {/** alt text field following invalid input */}<TextField
-                    error
-                    fullWidth
-                    label="Alternative Text"
-                    helperText="Describes image for vision-impaired users (defaults to caption)"
-                    className="text-field"
-                    value={imgAltTagText}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                        changeImgAltTagText(e.target.value);
-                    }}
-                    variant="outlined"
-                    margin="dense"
-                    multiline
-                />
-            </> :
+            renderEmptyCaptionOrAltTextError() :
             <>
                 {/** default caption text field */}<TextField
                     fullWidth
