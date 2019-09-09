@@ -3,18 +3,19 @@ import Data, { ContentData } from './components/_data/Data';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { DebugHeader } from './components/_debug/DebugHeader/DebugHeader';
 import { Footbar } from './components/Footbar/Footbar';
+import { ContentEditorProps } from './components/ContentEditor/ContentEditor';
+import { EnvironmentContext } from './contexts/EnvironmentContext/EnvironmentContext';
 import { useWindowWidth } from './hooks/useWindowWidth';
-import { WindowWidthContext } from './contexts/WindowWidthContext';
 import { LoadingScreen } from './components/LoadingScreen/LoadingScreen';
 import { CustomAppBar } from './components/CustomAppBar/CustomAppBar';
 import { DebugFonts } from './components/_debug/DebugFonts';
+import { ContentView } from './components/ContentView/ContentView';
 import "./App.css";
 
 // comment out for production build
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
-import { ContentEditor } from './components/ContentEditor/ContentEditor';
+// import 'firebase/auth';
+// import 'firebase/database';
+
 
 // This line is to remove a bug that Firefox has
 // TODO: insert link explaining why
@@ -22,18 +23,20 @@ window.addEventListener("unload", function () { });
 
 type AppProps = {
     IEOREDGE: boolean,
-    currYear: number
+    currYear: number,
+    firebase?: any,
+    ContentEditor: React.FC<ContentEditorProps>
 }
-const debugURL = "/Editor";
+const debugURL = "/MAIN_PAGE";
 
 /**
  * App is the main application that handles all the route logic and rendering.
  * 
  * Last Modified
  * William Kwok
- * June 16, 2019
+ * July 17, 2019
  */
-const App: React.FC<AppProps> = ({ IEOREDGE, currYear }) => {
+const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [contentData, setContentData] = useState<ContentData>(Data.getContentData());
     const [pageTitle, setPageTitle] = useState<string>(debugURL)
@@ -115,7 +118,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear }) => {
         } else {
             setContentData(Data.getContentData())
         }
-    }, [pageTitle, imgsLoaded, imgsToPrefetch, currYear]);
+    }, [pageTitle, imgsLoaded, imgsToPrefetch, currYear, firebase]);
 
     /**
      * Sets the loading state to true. This is used for in between pages. This function MUST be sent
@@ -142,7 +145,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear }) => {
     }
 
     return <div className="App">
-        <WindowWidthContext.Provider value={{ windowWidth }}>
+        <EnvironmentContext.Provider value={{ windowWidth, firebase }}>
             <MuiThemeProvider theme={theme}>
                 {debugMode && <>
                     <DebugHeader />
@@ -179,7 +182,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear }) => {
 
                         {/*****************************************/}
                         {pageTitle !== "/Editor" && pageTitle !== "" &&
-                            <div>This page is under construction</div>
+                            <ContentView contentData={contentData} pageTitle={pageTitle} />
                         }
                     </div>
                     <Footbar a={a} />
@@ -188,7 +191,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear }) => {
                 {loading &&
                     <LoadingScreen />}
             </MuiThemeProvider>
-        </WindowWidthContext.Provider>
+        </EnvironmentContext.Provider>
     </div>
 }
 
