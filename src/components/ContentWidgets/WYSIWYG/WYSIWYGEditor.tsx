@@ -11,6 +11,7 @@ export const WYSIWYGEditor: React.FC<WidgetEditorProps> = ({
 }) => {
     const contentState = editedContent.wysiwyg_state ?
     JSON.parse(editedContent.wysiwyg_state) : convertToRaw(EditorState.createEmpty().getCurrentContent());
+
     
     return <>
         <Editor
