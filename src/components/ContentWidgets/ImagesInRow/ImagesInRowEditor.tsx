@@ -188,6 +188,7 @@ export const ImagesInRowEditor: React.FC<WidgetEditorProps> = ({
                         </a>
                     </figure>
                     <Button
+                        id="delete-button"
                         variant="outlined"
                         onClick={() => {
                             pictureCaptionPairs.splice(index, 1);
