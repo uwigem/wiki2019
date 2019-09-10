@@ -50,7 +50,7 @@ type WidgetLiveEditProps = {
       }
     });
 
-    // update server timestamp at certain interval (if editing)
+    // update server timestamp at certain interval (if in the editing stage)
     if (editing) {
       const updateOnce = () => {
         console.log("updating timestamp: " + firebase.database.ServerValue.TIMESTAMP.toString()
@@ -63,9 +63,10 @@ type WidgetLiveEditProps = {
 
       updateOnce();
 
+      // update database every 45s, consider less than 60s editing
       const interval = setInterval(() => {
         updateOnce();
-      }, 30000);
+      }, 45000);
 
       return () => clearInterval(interval);
     }
