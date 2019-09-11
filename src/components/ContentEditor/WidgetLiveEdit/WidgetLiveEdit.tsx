@@ -32,6 +32,9 @@ type WidgetLiveEditProps = {
   let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
 
   useEffect(() => {
+    console.log("running effects");
+
+    /*
     // check firebase for recent edit timestamp
     widgetRef.once('value', function(snapshot) {
       if (snapshot.val()) {
@@ -49,6 +52,7 @@ type WidgetLiveEditProps = {
         console.log("live edit snapshot is null");
       }
     });
+    */
 
     // update server timestamp at certain interval (if in the editing stage)
     if (editing) {
@@ -78,6 +82,21 @@ type WidgetLiveEditProps = {
   widgetRef.update({ timestamp: firebase.database.ServerValue.TIMESTAMP, editor: (user && user.email) || "Unknown user" });
   */
 
+  // check firebase for recent edit timestamp
+  widgetRef.once('value', function(snapshot) {
+    if (snapshot.val()) {
+      console.log("snapshot returned: " + snapshot.val().timestamp + " " + snapshot.val().editor);
+
+      let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
+
+      if (diff < 60) {
+        setMessage("currently being edited by " + snapshot.val().editor);
+        console.log("message updated");
+      }
+    } else {
+      console.log("live edit snapshot is null");
+    }
+  });
 
   return <div>
     {message}
