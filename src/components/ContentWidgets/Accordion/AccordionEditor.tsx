@@ -14,7 +14,6 @@ export const AccordionEditor: React.FC<WidgetEditorProps> = ({
         newAccordion.push({title: emptyPage.title, panel: emptyPage.panel});
         newAccordion = newAccordion.concat(accordionContent.slice(index));
         setEditedContentOnChange("accordion_content", newAccordion);
-        console.log(index);
     };
 
     const deleteAccordionSection = (index: number) => {
@@ -24,13 +23,13 @@ export const AccordionEditor: React.FC<WidgetEditorProps> = ({
     }
 
     const updateTitle = (s: string, index: number) => {
-        let newAccordion = accordionContent.slice(0);;
+        let newAccordion = accordionContent.slice(0);
         newAccordion[index].title = s;
         setEditedContentOnChange("accordion_content", newAccordion);
     };
 
     const updatePanel = (s: string, index: number) => {
-        let newAccordion = accordionContent.slice(0);;
+        let newAccordion = accordionContent.slice(0);
         newAccordion[index].panel = s;
         setEditedContentOnChange("accordion_content", newAccordion);
     };
@@ -68,5 +67,4 @@ export const AccordionEditor: React.FC<WidgetEditorProps> = ({
             >+</button>
         </div>
     </>
-
 }
