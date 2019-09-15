@@ -1,0 +1,12 @@
+.header {
+    color: black;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.header-image {
+    position: absolute;
+    height: auto;
+    z-index: -1;
+}
