@@ -12,15 +12,14 @@ export const WYSIWYGEditor: React.FC<WidgetEditorProps> = ({
     const contentState = editedContent.wysiwyg_state ?
     JSON.parse(editedContent.wysiwyg_state) : convertToRaw(EditorState.createEmpty().getCurrentContent());
 
-    
     return <>
         <Editor
             initialContentState={contentState}
             wrapperClassName="wysiwygWrapper"
             editorClassName="wysiwygEditor"
             // convert content to a raw JS structure, and save it as JSON string in database
-            onEditorStateChange={(e) => 
-                setEditedContentOnChange("wysiwyg_state", JSON.stringify(convertToRaw(e.getCurrentContent())))}
+            onContentStateChange={(e) => 
+                setEditedContentOnChange("wysiwyg_state", JSON.stringify(e))}
         />
     </>
 }

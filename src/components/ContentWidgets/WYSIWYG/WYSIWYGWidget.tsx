@@ -4,7 +4,7 @@ import { ContentSingularData } from '../../_data/ContentSingularData';
 import './WYSIWYGEditor.css';
 
 export const WYSIWYGWidget: React.FC<ContentSingularData> = ({ wysiwyg_state }) => {
-    if(!wysiwyg_state || wysiwyg_state === null) {
+    if(!wysiwyg_state) {
         return <></>
     } else {
         // display editor content by setting editor as read only
