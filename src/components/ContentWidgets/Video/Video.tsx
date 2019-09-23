@@ -10,18 +10,20 @@ import './Video.css';
  * July 15, 2019
  */
 export const Video: React.FC<ContentSingularData> = ({
-    video_videoLink,
-    video_videoWidthPercentage
+	video_videoLink,
+	video_videoWidthPercentage
 }) => {
-    if (!video_videoLink || !video_videoWidthPercentage) {
-        return <></>
-    }
+	if (!video_videoLink || !video_videoWidthPercentage) {
+		return <></>
+	}
 
-    return <video
-            className="video-player-auto-height"
-            width={video_videoWidthPercentage + "%"}
-            controls>
-        <source src={video_videoLink} type="video/mp4" />
-        Your browser does not support the video tag.
-    </video>
+	return <div className="centered">
+		<video
+			className="video-player-auto-height"
+			width={video_videoWidthPercentage + "%"}
+			controls>
+			<source src={video_videoLink} type="video/mp4" />
+			Your browser does not support the video tag.
+    	</video>
+	</div>
 }
