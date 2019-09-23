@@ -9,7 +9,6 @@
 #		export IGEM_YEAR=2019
 #	Requires version: 1.0.2
 #
-# To run this file, do `npm run deploy`
+# To run this file, do `npm run deploybase`
 
-igem-cli -t JavaScript ./build/static/js/main.js
-igem-cli -t CSS ./build/static/css/main.css
+igem-cli -t \  ./scripts/template.html # does not work at the moment, do not use.
