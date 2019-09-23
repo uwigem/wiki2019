@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ContentData, ContentHashMapping } from '../_data/Data';
-import firebase from 'firebase/app';
-import 'firebase/database';
-import 'firebase/auth';
 import { useAuth } from '../../hooks/useAuth';
 import './ContentEditor.css';
 import { ContentEditorBanner } from './ContentEditorBanner/ContentEditorBanner';
@@ -11,8 +8,9 @@ import { AddNewWidgetButton } from './AddNewWidgetButton/AddNewWidgetButton';
 import { WidgetTypes } from '../ContentMapping/ContentMapping';
 import { ContentSingularData } from '../_data/ContentSingularData';
 import { HistoryTypes } from '../_debug/EditorHistory';
+import { EnvironmentContext } from '../../contexts/EnvironmentContext/EnvironmentContext';
 
-type ContentEditorProps = {
+export type ContentEditorProps = {
     contentData: ContentData,
     currYear: number
 }
@@ -24,7 +22,7 @@ type ContentEditorProps = {
  * 
  * Last Modified
  * William Kwok
- * June 22, 2019
+ * July 17, 2019
  * 
  * TODO: 
  *  - Make "select a page to modify" message more prominent
@@ -34,7 +32,12 @@ type ContentEditorProps = {
 export const ContentEditor: React.FC<ContentEditorProps> = ({ contentData, currYear }) => {
     const [userLoading, setUserLoading] = useState<boolean>(true);
     const [pageToEdit, setPageToEdit] = useState<string | null>(null);
-    const user = useAuth(setUserLoading);
+    const { firebase } = useContext(EnvironmentContext);
+    const user = useAuth(firebase, setUserLoading);
+
+    if (!firebase) {
+        return <></>
+    }
 
     if (!userLoading && contentData) {
         return <>
@@ -49,12 +52,12 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ contentData, currY
                     {/** Force TS to not throw errors, because we check if it is defined */}
                     {contentData[pageToEdit].contentOrder &&
                         contentData[pageToEdit].content &&
-                        (contentData[pageToEdit].contentOrder as string[]).map((contentHash, index) => {
-                            let content = (contentData[pageToEdit].content as ContentHashMapping)[contentHash];
+                        contentData[pageToEdit].contentOrder!.map((contentHash, index) => {
+                            let content = contentData[pageToEdit].content![contentHash];
                             return <React.Fragment key={contentHash}>
                                 <AddNewWidgetButton onClick={async () => {
                                     // spread operation to CLONE the array rather than directly modify.
-                                    let contentOrderToAdd: string[] = [...(contentData[pageToEdit].contentOrder as string[])];
+                                    let contentOrderToAdd: string[] = [...contentData[pageToEdit].contentOrder!];
                                     let newKey = generateHash();
                                     contentOrderToAdd.splice(index, 0, newKey);
                                     let contentOnFirebase: ContentSingularData = {
@@ -78,7 +81,7 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ contentData, currY
                             </React.Fragment>
                         })}
                     <AddNewWidgetButton onClick={async () => {
-                        let contentOrderToAdd: string[] = (contentData[pageToEdit].contentOrder && [...contentData[pageToEdit].contentOrder as string[]]) || [];
+                        let contentOrderToAdd: string[] = (contentData[pageToEdit].contentOrder && [...contentData[pageToEdit].contentOrder!]) || [];
                         let newKey = generateHash();
                         contentOrderToAdd.push(newKey);
                         let contentOnFirebase: ContentSingularData = {
