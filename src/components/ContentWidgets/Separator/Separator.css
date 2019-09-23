@@ -1,7 +1,8 @@
-.separator {
-    margin: 30px auto 5px;
-    height: 5px;
+.separator-container .separator {
+	margin: 30px auto 5px;
+	height: 5px;
 }
-input {
-    margin: 10px;
+
+.separator-container input {
+	margin: 10px;
 }

@@ -8,23 +8,24 @@ import './Separator.css';
  *
  * Last Modified
  * Jennifer Tao
-<<<<<<< HEAD
  * July 14, 2019
  */
 export const Separator: React.FC<ContentSingularData> = ({
-    separator_width,
-    separator_color
+	separator_width,
+	separator_color
 }) => {
-    if (!separator_width || !separator_color) {
-        return <></>;
-    }
-    const {r, g, b} = separator_color;
+	if (!separator_width || !separator_color) {
+		return <></>;
+	}
+	const { r, g, b } = separator_color;
 
-    return <div
-        className="separator"
-        style={{
-            width: separator_width + "%",
-            backgroundColor: `rgb(${r},${g},${b})`
-        }}
-    />;
+	return <div className="separator-container">
+		<div
+			className="separator"
+			style={{
+				width: separator_width + "%",
+				backgroundColor: `rgb(${r},${g},${b})`
+			}}
+		/>
+	</div>
 };
