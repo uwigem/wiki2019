@@ -1,12 +1,52 @@
+/* header widget style */
 .header {
-    color: black;
-    width: 100%;
-    height: auto;
+    position: relative;
     text-align: center;
+    font-family: sans-serif;
+    overflow: hidden;
 }
 
-.header-image {
-    position: absolute;
+.header-background {
+    width: 110%;
     height: auto;
-    z-index: -1;
+    position: absolute;
+    left: -5%;
+    top: -5%;
+}
+
+.header-hidden {
+    visibility: hidden;
+}
+
+.header-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* header editor style */
+.header-editor, .header-preview {
+    display: block;
+    overflow: auto;
+}
+
+.header-editor input, .header-editor p, .header-preview p {
+    margin: 2px 5px;
+    padding: 2px;
+    display: inline;
+}
+
+.header-radio-div {
+    margin-bottom: 10px;
+}
+
+.header-slider-y, .header-slider-x {
+    display: inline;
+}
+
+.header-slider-y {
+    float: left;
+}
+
+.header-slider-y input {
+    -webkit-appearance: slider-vertical;
 }

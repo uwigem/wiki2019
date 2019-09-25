@@ -4,6 +4,7 @@ import { ContentSingularData } from '../../_data/ContentSingularData';
 export type HeaderContent = {
     header_text: string,
     text_size: number,
+    text_color: string,
     image_link: string,
     image_blur: number,
     image_zoom: number,
@@ -16,26 +17,33 @@ export type HeaderContent = {
  * 
  * Last Modified
  * Jennifer Tao
- * September 14, 2019
+ * September 20, 2019
  */
 export const Header: React.FC<ContentSingularData> = ({ header_content }) => {
     if (!header_content) {
         return<></>
     }
-    const imageStyle = {
-        width: header_content.image_zoom + '%',
-        filter: 'blur(' + header_content.image_blur + 'px)',
-        left: header_content.image_top_x + '%',
-        top: header_content.image_top_y + '%'
-    };
+
+    const imgStyle = {
+        fontSize: (header_content.text_size+1) +'0%',
+        backgroundImage: 'url("'+ header_content.image_link+'")',
+        backgroundPosition: header_content.image_top_x + '% ' + header_content.image_top_y + '%',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: header_content.image_zoom + '%',
+        filter: 'blur(' + header_content.image_blur + 'px)'
+    }
 
     const textStyle = {
-        fontSize: header_content.text_size + '%',
+        fontSize: header_content.text_size + 'vw',
+        color: header_content.text_color
     }
       
-    return <div className="header">
-        
-        <img className="header-image" style={imageStyle}  src={header_content.image_link}></img>   
-        <p className="header-name" style={textStyle}>{header_content.header_text}</p>
+    return <div className="header"  style={textStyle}>     
+        <div className="header-text">
+            <p>{header_content.header_text}</p>
+        </div>
+        <div className="header-background" style={imgStyle}>
+            <p className="header-hidden">{header_content.header_text}</p>
+        </div>
     </div>
 }
