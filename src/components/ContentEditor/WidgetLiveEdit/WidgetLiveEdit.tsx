@@ -37,50 +37,57 @@ type WidgetLiveEditProps = {
 
   let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
 
+  const updateOnce = () => {
+    console.log("updating timestamp: " + firebase.database.ServerValue.TIMESTAMP.toString()
+      + ", user: " + (user != null && user.toString()));
+    widgetRef.update({
+      timestamp: firebase.database.ServerValue.TIMESTAMP,
+      editor: (user && user.email) || "Unknown user",
+      saved: false
+    });
+  };
+
+  const readTimestampOnce = () => {
+    widgetRef.once('value', function(snapshot) {
+      if (snapshot.val()) {
+        console.log("snapshot returned: " + snapshot.val().timestamp + " " + snapshot.val().editor);
+
+        let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
+        let saved: boolean = snapshot.val().saved;
+
+        if (!saved && diff < 60) {
+          let editorName = snapshot.val().editor;
+
+          setMessage("currently being edited by " + (editorName == (user && user.email) ? "you" : editorName));
+        }
+      }
+    });
+  }
+
   useEffect(() => {
-    console.log("running effects");
-
-    // update server timestamp at certain interval (if in the editing stage)
     if (editing) {
-      const updateOnce = () => {
-        console.log("updating timestamp: " + firebase.database.ServerValue.TIMESTAMP.toString()
-          + ", user: " + (user != null && user.toString()));
-        widgetRef.update({
-          timestamp: firebase.database.ServerValue.TIMESTAMP,
-          editor: (user && user.email) || "Unknown user",
-          saved: false
-        });
-      };
-
+      // update database every 45s, consider edits as recent as 60s as still editing
       updateOnce();
-
-      // update database every 45s, consider less than 60s editing
-      const interval = setInterval(() => {
+      const updateInterval = setInterval(() => {
         updateOnce();
       }, 45000);
-
-      return () => clearInterval(interval);
+      return () => clearInterval(updateInterval);
     }
   });
 
-  // check firebase for recent edit timestamp
-  widgetRef.once('value', function(snapshot) {
-    if (snapshot.val()) {
-      console.log("snapshot returned: " + snapshot.val().timestamp + " " + snapshot.val().editor);
-
-      let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
-      let saved: boolean = snapshot.val().saved;
-
-      if (!saved && diff < 60) {
-        let editorName = snapshot.val().editor;
-
-        setMessage("currently being edited by " + (editorName == (user && user.email) ? "you" : editorName));
-        console.log("message updated");
-      }
-    } else {
-      console.log("live edit snapshot is null");
-    }
+  /*
+  useEffect(() => {
+    // recheck firebase and update banner every 10s
+    readTimestampOnce();
+    const recheckInterval = setInterval(() => {
+      console.log("rechecked timestamp");
+      readTimestampOnce();
+    }, 10000);
+    return () => clearInterval(recheckInterval);
   });
+  */
+
+  readTimestampOnce();
 
   let bar = <div
     className={(message == "safe to edit") ?
