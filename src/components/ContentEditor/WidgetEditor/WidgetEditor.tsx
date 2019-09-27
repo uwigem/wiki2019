@@ -101,6 +101,9 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
                             creator: (user && user.email) || "Unknown user",
                             content: editedContent
                         });
+                        await firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`).update({
+                            saved: true
+                        });
                         setEditing(false);
                     }}>
                     Save

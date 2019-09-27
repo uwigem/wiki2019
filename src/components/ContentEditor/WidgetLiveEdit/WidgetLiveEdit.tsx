@@ -5,11 +5,17 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+import red from '@material-ui/core/colors/red';
+import green from '@material-ui/core/colors/green';
 import { WidgetTypes, ContentMapping } from '../../ContentMapping/ContentMapping';
 import { HistoryTypes } from '../../_debug/EditorHistory';
 import equal from 'deep-equal';
 import { EnvironmentContext } from '../../../contexts/EnvironmentContext/EnvironmentContext';
 import firebase from 'firebase';
+import { createMuiTheme } from '@material-ui/core';
+
+import './WidgetLiveEdit.css';
 
 type WidgetLiveEditProps = {
   contentHash: string,
@@ -34,26 +40,6 @@ type WidgetLiveEditProps = {
   useEffect(() => {
     console.log("running effects");
 
-    /*
-    // check firebase for recent edit timestamp
-    widgetRef.once('value', function(snapshot) {
-      if (snapshot.val()) {
-        console.log("snapshot returned: " + snapshot.val().timestamp + " " + snapshot.val().editor);
-
-        let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
-
-        console.log("time difference: " + diff + " s");
-
-        if (diff < 60) {
-          setMessage("currently being edited by " + snapshot.val().editor);
-          console.log("message updated");
-        }
-      } else {
-        console.log("live edit snapshot is null");
-      }
-    });
-    */
-
     // update server timestamp at certain interval (if in the editing stage)
     if (editing) {
       const updateOnce = () => {
@@ -61,9 +47,10 @@ type WidgetLiveEditProps = {
           + ", user: " + (user != null && user.toString()));
         widgetRef.update({
           timestamp: firebase.database.ServerValue.TIMESTAMP,
-          editor: (user && user.email) || "Unknown user"
+          editor: (user && user.email) || "Unknown user",
+          saved: false
         });
-      }
+      };
 
       updateOnce();
 
@@ -76,21 +63,18 @@ type WidgetLiveEditProps = {
     }
   });
 
-
-  /*
-  console.log("updating timestamp: " + firebase.database.ServerValue.TIMESTAMP.toString() + ", user: " + (user != null && user.toString()));
-  widgetRef.update({ timestamp: firebase.database.ServerValue.TIMESTAMP, editor: (user && user.email) || "Unknown user" });
-  */
-
   // check firebase for recent edit timestamp
   widgetRef.once('value', function(snapshot) {
     if (snapshot.val()) {
       console.log("snapshot returned: " + snapshot.val().timestamp + " " + snapshot.val().editor);
 
       let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
+      let saved: boolean = snapshot.val().saved;
 
-      if (diff < 60) {
-        setMessage("currently being edited by " + snapshot.val().editor);
+      if (!saved && diff < 60) {
+        let editorName = snapshot.val().editor;
+
+        setMessage("currently being edited by " + (editorName == (user && user.email) ? "you" : editorName));
         console.log("message updated");
       }
     } else {
@@ -98,7 +82,14 @@ type WidgetLiveEditProps = {
     }
   });
 
-  return <div>
+  let bar = <div
+    className={(message == "safe to edit") ?
+                "widget-live-edit-bar-safe" : "widget-live-edit-bar-unsafe"}>
     {message}
+  </div>;
+
+
+  return <div className="widget-live-edit-chip">
+    {bar}
   </div>
  }
