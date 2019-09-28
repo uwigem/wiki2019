@@ -38,8 +38,6 @@ type WidgetLiveEditProps = {
   let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
 
   const updateOnce = () => {
-    console.log("updating timestamp: " + firebase.database.ServerValue.TIMESTAMP.toString()
-      + ", user: " + (user != null && user.toString()));
     widgetRef.update({
       timestamp: firebase.database.ServerValue.TIMESTAMP,
       editor: (user && user.email) || "Unknown user",
@@ -50,8 +48,6 @@ type WidgetLiveEditProps = {
   const readTimestampOnce = () => {
     widgetRef.once('value', function(snapshot) {
       if (snapshot.val()) {
-        console.log("snapshot returned: " + snapshot.val().timestamp + " " + snapshot.val().editor);
-
         let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
         let saved: boolean = snapshot.val().saved;
 
@@ -90,7 +86,8 @@ type WidgetLiveEditProps = {
   readTimestampOnce();
 
   let bar = <div
-    className={(message == "safe to edit") ?
+    className={(message == "safe to edit" ||
+                message == "currently being edited by you") ?
                 "widget-live-edit-bar-safe" : "widget-live-edit-bar-unsafe"}>
     {message}
   </div>;
