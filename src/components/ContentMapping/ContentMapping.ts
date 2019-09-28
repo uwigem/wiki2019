@@ -15,6 +15,8 @@ import { ImagesInRow } from '../ContentWidgets/ImagesInRow/ImagesInRow';
 import { ImagesInRowEditor } from '../ContentWidgets/ImagesInRow/ImagesInRowEditor';
 import { Separator } from '../ContentWidgets/Separator/Separator';
 import { SeparatorEditor } from '../ContentWidgets/Separator/SeparatorEditor';
+import { Gallery } from '../ContentWidgets/Gallery/Gallery';
+import { GalleryEditor } from '../ContentWidgets/Gallery/GalleryEditor';
 
 
 export type WidgetEditorProps = {
@@ -38,7 +40,8 @@ export enum WidgetTypes {
 	SEPARATOR = "SEPARATOR",
 	IMAGES_IN_ROW = "IMAGES_IN_ROW",
 	PDF_VIEWER = "PDF_VIEWER",
-	VIDEO = "VIDEO"
+    VIDEO = "VIDEO",
+    GALLERY = "GALLERY"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -73,5 +76,9 @@ export const ContentMapping: ContentMappingType = {
 	VIDEO: {
 		widget: Video,
 		editor: VideoEditor
-	},
+    },
+    GALLERY: {
+        widget: Gallery,
+        editor: GalleryEditor
+    }
 }

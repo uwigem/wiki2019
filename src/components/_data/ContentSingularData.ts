@@ -14,6 +14,7 @@ export type ContentSingularData = {
 	video_videoWidthPercentage?: number
 	imagesInRow_items?: ImgRowItem[]
 	separator_width?: number
-	separator_color?: { r: number; g: number; b: number }
-	tabView_content?: Tab[]
+    separator_color?: { r: number; g: number; b: number }
+    tabView_content?: Tab[]
+    gallery_content?: string[]
 }
