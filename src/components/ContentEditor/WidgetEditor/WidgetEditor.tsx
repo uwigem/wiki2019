@@ -22,12 +22,12 @@ type WidgetEditorProps = {
 
 /**
  * WidgetEditor is the widget editing component. It handles the logic for editing a single widget,
- * updating it, and rendering it.
- *
+ * updating it, and rendering it. 
+ * 
  * Last Modified
  * July 17, 2019
  * William Kwok
- *
+ * 
  * TODO:
  *  - Update the selector to be more user friendly (make a thing popup?)
  *  - Current it is not user friendly to benefit development
@@ -58,14 +58,14 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
         {!editing && <>
             <ContentWidget {...editedContent} />
             <div>
-                <Button variant="contained" color="primary"
-                    onClick={() => setEditing(true)}>Edit</Button>
                 <WidgetLiveEdit
                     contentHash={contentHash}
                     currYear={currYear}
                     pageToEdit={pageToEdit}
                     user={user}
-                    editing={false} />
+                    editing={false}
+                    setEditing={setEditing}
+                    editedContent={editedContent} />
             </div>
         </>}
 
@@ -92,28 +92,14 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
                     setEditedContentOnChange(keyToChange, valueToChange, editedContent, setEditedContent);
                 }} />
             <div>
-                <Button variant="contained" color="primary"
-                    onClick={async () => {
-                        await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/content/${contentHash}`).set(editedContent);
-                        await firebase.database().ref(`${currYear}/EditHistory/${pageToEdit}/${contentHash}`).push({
-                            type: HistoryTypes.UPDATE,
-                            timestamp: firebase.database.ServerValue.TIMESTAMP,
-                            creator: (user && user.email) || "Unknown user",
-                            content: editedContent
-                        });
-                        await firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`).update({
-                            saved: true
-                        });
-                        setEditing(false);
-                    }}>
-                    Save
-                </Button>
                 <WidgetLiveEdit
                     contentHash={contentHash}
                     currYear={currYear}
                     pageToEdit={pageToEdit}
                     user={user}
-                    editing={true} />
+                    editing={true}
+                    setEditing={setEditing}
+                    editedContent={editedContent} />
             </div>
         </>}
     </div>
@@ -124,13 +110,13 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
  * setEditedContentOnChange will modify the specific widget property specified. The limitation
  * of this function is that you will only be allowed to modify one property of the widget at a
  * time.
- *
+ * 
  * Note: The value can be _any_ type, so if you did want to modify two values at once, you
  * would create an object to house those two values instead.
- *
+ * 
  * Another note: This only updates the component client side until the save button is pressed to
  * submit the updates to firebase!
- *
+ * 
  * @param keyToChange string key of the key value pair to update
  * @param valueToChange value of the key value pair to update. Any type.
  */

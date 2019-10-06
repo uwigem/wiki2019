@@ -1,21 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import red from '@material-ui/core/colors/red';
-import green from '@material-ui/core/colors/green';
-import { WidgetTypes, ContentMapping } from '../../ContentMapping/ContentMapping';
 import { HistoryTypes } from '../../_debug/EditorHistory';
-import equal from 'deep-equal';
-import { EnvironmentContext } from '../../../contexts/EnvironmentContext/EnvironmentContext';
 import firebase from 'firebase';
-import { createMuiTheme } from '@material-ui/core';
-
 import './WidgetLiveEdit.css';
+
+// if last edit is older than this (in seconds) regard it as not being edited
+let firebaseTimeout = 60;
+// how frequenty the client should update firebase with a new timestamp
+var refreshInterval = 45;
 
 type WidgetLiveEditProps = {
   contentHash: string,
@@ -23,20 +16,33 @@ type WidgetLiveEditProps = {
   pageToEdit: string,
   user: firebase.User | null
   editing: boolean
+  setEditing: any,
+  editedContent: ContentSingularData
 };
 
 /**
- * WidgetLiveEdit communicate with firebase and display whether a widget is
- * currently being edited somewhere else.
+ * WidgetLiveEdit manages the edit/save button, communicate with firebase to
+ * figure out the state of the widget and display whether a widget is currently
+ * being edited somewhere else.
  */
 
  export const WidgetLiveEdit: React.FC<WidgetLiveEditProps> = ({
-   contentHash, currYear, pageToEdit, user, editing
+   contentHash, currYear, pageToEdit, user, editing, setEditing, editedContent
  }) => {
+
+  enum EditingState {
+    Safe,
+    CurrentUser,
+    Unsafe
+  }
+
+  let [editingState, setEditingState] = useState<EditingState>(EditingState.Safe);
   let [message, setMessage] = useState<string>("safe to edit");
 
   let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
 
+
+  // update firebase with the current timestamp
   const updateOnce = () => {
     widgetRef.update({
       timestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -45,55 +51,97 @@ type WidgetLiveEditProps = {
     });
   };
 
-  const readTimestampOnce = () => {
-    widgetRef.once('value', function(snapshot) {
-      if (snapshot.val()) {
-        let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
-        let saved: boolean = snapshot.val().saved;
-
-        if (!saved && diff < 60) {
-          let editorName = snapshot.val().editor;
-
-          setMessage("currently being edited by " + (editorName == (user && user.email) ? "you" : editorName));
-        }
-      }
-    });
-  }
-
   useEffect(() => {
     if (editing) {
-      // update database every 45s, consider edits as recent as 60s as still editing
-      updateOnce();
+      // update database on a set interval if we're editing.
+      // if browser is closed unexpectedly, the last time we're still online
+      // will be recorded.
       const updateInterval = setInterval(() => {
         updateOnce();
-      }, 45000);
+      }, refreshInterval * 1000);
       return () => clearInterval(updateInterval);
     }
   });
 
-  /*
   useEffect(() => {
-    // recheck firebase and update banner every 10s
-    readTimestampOnce();
-    const recheckInterval = setInterval(() => {
-      console.log("rechecked timestamp");
-      readTimestampOnce();
-    }, 10000);
-    return () => clearInterval(recheckInterval);
+    // set up listener to firebase, re-render when updated
+    widgetRef.on('value', function(snapshot) {
+      if (snapshot.val()) {
+        console.log("listener heard a change");
+        let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
+        let saved: boolean = snapshot.val().saved;
+        console.log("time diff: " + diff);
+
+        if (!saved && diff < firebaseTimeout) {
+          // not saved and not yet timed out
+          let editorName = snapshot.val().editor;
+          if (user && editorName == user.email) {
+            setEditingState(EditingState.CurrentUser);
+            setMessage("currently edited by you");
+          } else {
+            setEditingState(EditingState.Unsafe);
+            setMessage("currently edited by " + editorName);
+          }
+        } else {
+          // otherwise safe
+          setEditingState(EditingState.Safe);
+          setMessage("safe to edit");
+        }
+      }
+    });
   });
-  */
 
-  readTimestampOnce();
-
-  let bar = <div
-    className={(message == "safe to edit" ||
-                message == "currently being edited by you") ?
-                "widget-live-edit-bar-safe" : "widget-live-edit-bar-unsafe"}>
+  // determine banner style
+  let banner = <div
+    className={editingState == EditingState.Unsafe ?
+      "widget-live-edit-bar-unsafe" : "widget-live-edit-bar-safe"} >
     {message}
   </div>;
 
+  // determine which buttons to show
+  let button = editing ?
+    <Button variant="contained" color="primary"
+        onClick={async () => {
+            await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/content/${contentHash}`).set(editedContent);
+            await firebase.database().ref(`${currYear}/EditHistory/${pageToEdit}/${contentHash}`).push({
+                type: HistoryTypes.UPDATE,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                creator: (user && user.email) || "Unknown user",
+                content: editedContent
+            });
+            await widgetRef.update({
+                saved: true
+            });
+            setEditing(false);
+        }}>
+        Save
+    </Button> :
+    (editingState == EditingState.Unsafe ?
+    <><Button variant="contained" color="primary"
+      onClick={() => {
+        setEditing(true);
+        updateOnce();
+      }} disabled>
+      Edit
+    </Button>
+    <Button variant="contained" color="primary"
+      onClick={() => {
+        setEditing(true);
+        updateOnce();
+      }}>
+      Edit Anyway
+    </Button></> :
+    <Button variant="contained" color="primary"
+      onClick={() => {
+        setEditing(true);
+        updateOnce();
+      }} >
+      Edit
+    </Button>
+    );
 
-  return <div className="widget-live-edit-chip">
-    {bar}
+  return <div>
+    {button}
+    {banner}
   </div>
  }
