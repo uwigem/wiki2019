@@ -5,7 +5,7 @@
     margin-top: 20px;
 }
 
-.wiki-form {
+.widget-picker {
     max-width: 500px;
     background: #f4f7f8;
     margin: 10px auto;
@@ -14,31 +14,31 @@
     box-shadow: 0 0 0 1pt #531abc;
     font-family: Arial, Helvetica, sans-serif;
 }
-.wiki-form fieldset {
+.widget-picker fieldset {
     border: none;
     padding: 0px;
     margin: 0px;
 }
-.wiki-form legend {
+.widget-picker legend {
     font-size: 1.6em;
     font-weight: 600;
     margin-bottom: 20px;
     padding-top: 10px;
     text-align: center;
 }
-.wiki-form label {
+.widget-picker label {
     display: block;
     margin-bottom: 8px;
 }
-.wiki-form input[type="text"],
-.wiki-form input[type="date"],
-.wiki-form input[type="datetime"],
-.wiki-form input[type="email"],
-.wiki-form input[type="search"],
-.wiki-form input[type="time"],
-.wiki-form input[type="url"],
-.wiki-form textarea,
-.wiki-form select {
+.widget-picker input[type="text"],
+.widget-picker input[type="date"],
+.widget-picker input[type="datetime"],
+.widget-picker input[type="email"],
+.widget-picker input[type="search"],
+.widget-picker input[type="time"],
+.widget-picker input[type="url"],
+.widget-picker textarea,
+.widget-picker select {
     font-family: Arial, Helvetica, sans-serif;
     background: rgba(255, 255, 255, .1);
     border: none;
@@ -57,23 +57,23 @@
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
     margin-bottom: 16px;
 }
-.wiki-form input[type="text"]:focus,
-.wiki-form input[type="date"]:focus,
-.wiki-form input[type="datetime"]:focus,
-.wiki-form input[type="email"]:focus,
-.wiki-form input[type="search"]:focus,
-.wiki-form input[type="time"]:focus,
-.wiki-form input[type="url"]:focus,
-.wiki-form textarea:focus,
-.wiki-form select:focus {
+.widget-picker input[type="text"]:focus,
+.widget-picker input[type="date"]:focus,
+.widget-picker input[type="datetime"]:focus,
+.widget-picker input[type="email"]:focus,
+.widget-picker input[type="search"]:focus,
+.widget-picker input[type="time"]:focus,
+.widget-picker input[type="url"]:focus,
+.widget-picker textarea:focus,
+.widget-picker select:focus {
     background: #d2d9dd;
 }
-.wiki-form select {
+.widget-picker select {
     -webkit-appearance: menulist-button;
     height: 35px;
 }
-.wiki-form input[type="submit"],
-.wiki-form input[type="button"] {
+.widget-picker input[type="submit"],
+.widget-picker input[type="button"] {
     position: relative;
     display: block;
     padding: 15px 39px 14px 39px;
@@ -87,7 +87,7 @@
     border-width: 1px 1px 3px;
     margin-bottom: 16px;
 }
-.wiki-form input[type="submit"]:hover,
-.wiki-form input[type="button"]:hover {
+.widget-picker input[type="submit"]:hover,
+.widget-picker input[type="button"]:hover {
     background: #40168d;
 }
