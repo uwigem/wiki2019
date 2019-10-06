@@ -10,6 +10,7 @@ import { LoadingScreen } from './components/LoadingScreen/LoadingScreen';
 import { CustomAppBar } from './components/CustomAppBar/CustomAppBar';
 import { DebugFonts } from './components/_debug/DebugFonts';
 import { ContentView } from './components/ContentView/ContentView';
+import { NavigationBottom } from './components/NavigationBottom/NavigationBottom';
 import "./App.css";
 
 // comment out for production build
@@ -196,6 +197,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 							<ContentView contentData={contentData} pageTitle={pageTitle} />
 						}
 					</div>
+                    <NavigationBottom name={name} pageTitle={pageTitle} a={a}></NavigationBottom>
 					<Footbar a={a} />
 				</>}
 

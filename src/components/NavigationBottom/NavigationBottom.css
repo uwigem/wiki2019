@@ -1,0 +1,21 @@
+.nav-bottom {
+    padding: 20px;
+    font-size: 24px;
+}
+
+.nav-bottom-link {
+    width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nav-bottom-right {
+    text-align: right;
+}
+
+.nav-bottom svg {
+    margin: 0px 10px;
+    height: 20px;
+    width: 20px;
+}
+
