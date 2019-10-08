@@ -41,7 +41,7 @@ export const AccordionEditor: React.FC<WidgetEditorProps> = ({
                 <button 
                     className="accordion-add-new-button"
                     onClick={() => addAccordionSection(index)}
-                >+</button>
+                >Add</button>
                 <input 
                     type="text"
                     className="accordion-title-input"
@@ -51,7 +51,7 @@ export const AccordionEditor: React.FC<WidgetEditorProps> = ({
                 <button 
                     className="accordion-delete-button"
                     onClick={() => deleteAccordionSection(index)}
-                >-</button>
+                >Delete</button>
                 <textarea
                     className="accordion-panel-input"
                     rows={20}
@@ -64,7 +64,7 @@ export const AccordionEditor: React.FC<WidgetEditorProps> = ({
             <button 
                 className="accordion-add-new-button"
                 onClick={() => addAccordionSection(accordionContent.length)}
-            >+</button>
+            >Add</button>
         </div>
     </>
 }

@@ -10,12 +10,12 @@ import './Accordion.css';
  * Jennifer Tao
  * Auguest 10, 2019
  */
-export type accordionPageProps = {
+export type AccordionPageProps = {
     title: string, 
     panel: string
 }
 
-export const AccordionPage: React.FC<accordionPageProps> = ({
+export const AccordionPage: React.FC<AccordionPageProps> = ({
     title,
     panel
 }) => {
