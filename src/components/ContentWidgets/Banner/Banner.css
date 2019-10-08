@@ -1,52 +1,52 @@
 /* header widget style */
-.header {
+.banner {
     position: relative;
     text-align: center;
-    font-family: sans-serif;
     overflow: hidden;
 }
 
-.header-background {
+.banner-background {
     width: 110%;
-    height: auto;
+    height: 110%;
     position: absolute;
+    background-repeat: no-repeat;
     left: -5%;
     top: -5%;
 }
 
-.header-hidden {
+.banner-hidden {
     visibility: hidden;
 }
 
-.header-text {
+.banner-text {
     position: relative;
     z-index: 1;
 }
 
 /* header editor style */
-.header-editor, .header-preview {
+.banner-editor, .banner-preview {
     display: block;
     overflow: auto;
 }
 
-.header-editor input, .header-editor p, .header-preview p {
+.banner-editor input, .banner-editor p, .banner-preview p {
     margin: 2px 5px;
     padding: 2px;
     display: inline;
 }
 
-.header-radio-div {
+.banner-radio-div {
     margin-bottom: 10px;
 }
 
-.header-slider-y, .header-slider-x {
+.banner-slider-y, .banner-slider-x {
     display: inline;
 }
 
-.header-slider-y {
+.banner-slider-y {
     float: left;
 }
 
-.header-slider-y input {
+.banner-slider-y input {
     -webkit-appearance: slider-vertical;
 }

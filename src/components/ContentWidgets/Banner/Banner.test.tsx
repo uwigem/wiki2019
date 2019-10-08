@@ -1,10 +1,10 @@
 import React from 'react';
-import Enzyme, { shallow, mount } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { ContentSingularData } from '../../_data/ContentSingularData';
-import { Header } from './Header';
-import { HeaderEditor } from './HeaderEditor';
-import { Color } from './HeaderConstants';
+import { Banner } from './Banner';
+import { BannerEditor } from './BannerEditor';
+import { Color } from './BannerConstants';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -24,11 +24,11 @@ const fakeContent: ContentSingularData = {
 
 describe("Header component", () => {
     it("mounts correctly with empty props", () => {
-        mount(<Header header_content={emptyContent.header_content} />);
+        mount(<Banner header_content={emptyContent.header_content} />);
     });
 
     it("mounts correctly with fake props", () => {
-        mount(<Header header_content={fakeContent.header_content} />);
+        mount(<Banner header_content={fakeContent.header_content} />);
     });
 })
 
@@ -42,7 +42,7 @@ describe("HeaderEditor component", () => {
     });
 
     it("mounts correctly with empty props", () => {
-        mount(<HeaderEditor 
+        mount(<BannerEditor 
                 originalContent={emptyContent}
                 editedContent={emptyContent}
                 setEditedContentOnChange={fakeSetEditedContentOnChange}
@@ -50,7 +50,7 @@ describe("HeaderEditor component", () => {
     });
 
     it("mounts correctly with fake props", () => {
-        mount(<HeaderEditor 
+        mount(<BannerEditor 
                 originalContent={fakeContent}
                 editedContent={fakeContent}
                 setEditedContentOnChange={fakeSetEditedContentOnChange}
@@ -58,7 +58,7 @@ describe("HeaderEditor component", () => {
     });
 
     it("calls setEditedContentOnChange when the input updates", () => {
-        const wrapper = mount(<HeaderEditor 
+        const wrapper = mount(<BannerEditor 
                 originalContent={emptyContent}
                 editedContent={emptyContent}
                 setEditedContentOnChange={fakeSetEditedContentOnChange}
