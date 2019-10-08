@@ -14,7 +14,7 @@ export const WYSIWYGWidget: React.FC<ContentSingularData> = ({ wysiwyg_content }
         return <Editor
             initialContentState={contentState}
             wrapperClassName="wysiwyg-wrapper"
-            editorClassName="wysiwyg-editor"
+            editorClassName="wysiwyg-display"
             toolbarHidden={true}
             readOnly={true} 
         />
