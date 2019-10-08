@@ -12,6 +12,7 @@ import { DebugFonts } from './components/_debug/DebugFonts';
 import { ContentView } from './components/ContentView/ContentView';
 import { NavigationBottom } from './components/NavigationBottom/NavigationBottom';
 import "./App.css";
+import { FONT_FAMILY } from './components/_data/Constants';
 
 // comment out for production build
 // import 'firebase/auth';
@@ -59,7 +60,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 			}
 		},
 		typography: {
-			fontFamily: "Raleway"
+			fontFamily: FONT_FAMILY
 		}
 	});
 
