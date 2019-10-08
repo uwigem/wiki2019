@@ -31,7 +31,7 @@ export const GalleryEditor: React.FC<WidgetEditorProps> = ({
                 <button 
                     className="gallery-delete-button"
                     onClick={() => deleteContent(index)}
-                    >-</button>
+                    >Delete</button>
             </div>
         })}
         <div>
@@ -42,7 +42,7 @@ export const GalleryEditor: React.FC<WidgetEditorProps> = ({
                     newContent.push("");
                     setEditedContentOnChange("gallery_content", newContent);
                 }}
-                >+</button>
+                >Add</button>
         </div>
     </div>
 }

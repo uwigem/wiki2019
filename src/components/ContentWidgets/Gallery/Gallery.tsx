@@ -39,9 +39,8 @@ const GalleryImages: React.FC<galleryImagesProps> = ({
                 style={{visibility: (currentIndex > 0)? "visible" : "hidden"}}
                 onClick={() => {
                     console.log(currentIndex);
-                setCurrentIndex(currentIndex-1);
-                console.log(currentIndex)}}
-                >&#10094;</span>
+                setCurrentIndex(currentIndex-1);}}
+            >&#10094;</span>
             <div className="gallery-lightbox-content">
             <span 
                 className="gallery-lightbox-close"
@@ -76,7 +75,9 @@ export const Gallery: React.FC<ContentSingularData> = ({
     if (!gallery_content) {
         return <></>
     }
-    /** shuffle code using the Fisher-Yates algorithm by Jeff on stackoverflow  */
+    /** shuffle code using the Fisher-Yates algorithm by Jeff on stackoverflow  
+     *  https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+    */
     const shuffle = (a: string[]) => {
         var j, x, i;
         for (i = a.length - 1; i > 0; i--) {
