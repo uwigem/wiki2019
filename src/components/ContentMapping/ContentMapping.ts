@@ -25,7 +25,7 @@ export enum WidgetTypes {
     PLAIN_TEXT = "PLAIN_TEXT",
     STUB = "STUB",
     EXAMPLE_IMAGE = "EXAMPLE_IMAGE",
-    WYSIWYG_EDITOR = "WYSIWYG"
+    WYSIWYG_EDITOR = "WYSIWYG_EDITOR"
 }
 
 export const ContentMapping: ContentMappingType = {

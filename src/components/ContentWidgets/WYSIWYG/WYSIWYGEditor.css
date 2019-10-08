@@ -1,11 +1,7 @@
-.wysiwygWrapper {
-    margin: 1%
+.wysiwyg-wrapper {
+    margin: 10px
 }
 
-.displayWysiwyg {
-    margin-left: 2%
-}
-
-.wysiwygEditor {
-    background-color: white
+.wysiwyg-editor {
+    background-color: var(--white)
 }
