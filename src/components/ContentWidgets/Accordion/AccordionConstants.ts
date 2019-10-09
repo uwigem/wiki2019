@@ -1,4 +1,4 @@
 export const emptyPage = {
-    title: "",
-    panel: ""
+	title: "",
+	panel: ""
 }
