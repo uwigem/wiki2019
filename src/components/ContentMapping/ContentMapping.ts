@@ -21,6 +21,8 @@ import { WYSIWYGEditor } from '../ContentWidgets/WYSIWYG/WYSIWYGEditor';
 import { WYSIWYGWidget } from '../ContentWidgets/WYSIWYG/WYSIWYGWidget';
 import { Accordion } from '../ContentWidgets/Accordion/Accordion';
 import { AccordionEditor } from '../ContentWidgets/Accordion/AccordionEditor';
+import { TeamPage } from '../ContentWidgets/TeamPage/TeamPage';
+import { TeamPageEditor } from '../ContentWidgets/TeamPage/TeamPageEditor';
 
 export type WidgetEditorProps = {
 	originalContent: ContentSingularData,
@@ -46,7 +48,8 @@ export enum WidgetTypes {
 	VIDEO = "VIDEO",
 	WYSIWYG_EDITOR = "WYSIWYG_EDITOR",
 	BANNER = "BANNER",
-	ACCORDION = "ACCORDION"
+    ACCORDION = "ACCORDION",
+    TEAMPAGE = "TEAMPAGE"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -93,6 +96,10 @@ export const ContentMapping: ContentMappingType = {
 	ACCORDION: {
 		widget: Accordion,
 		editor: AccordionEditor
-	}
+    },
+    TEAMPAGE: {
+        widget: TeamPage,
+        editor: TeamPageEditor
+    }
 }
 
