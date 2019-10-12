@@ -4,21 +4,26 @@ import Button from '@material-ui/core/Button';
 import { HistoryTypes } from '../../_debug/EditorHistory';
 import firebase from 'firebase';
 import './WidgetLiveEdit.css';
-
-// if last edit is older than this (in seconds) regard it as not being edited
-let firebaseTimeout = 60;
-// how frequenty the client should update firebase with a new timestamp
-let refreshInterval = 45;
+import {LIVE_EDIT_TIMETOUT, LIVE_EDIT_REFRESH} from '../../_data/Constants';
 
 type WidgetLiveEditProps = {
-  contentHash: string,
-  currYear: number,
-  pageToEdit: string,
-  user: firebase.User | null
-  editing: boolean
-  setEditing: any,
-  editedContent: ContentSingularData
+	contentHash: string,
+	currYear: number,
+	pageToEdit: string,
+	user: firebase.User | null
+	editing: boolean
+	setEditing: any,
+	editedContent: ContentSingularData
 };
+
+enum EditingState {
+	Safe,
+	CurrentUser,
+	Unsafe
+}
+
+const SAFE: string = "safe to edit";
+const USER: string = "currently edited by you";
 
 /**
  * WidgetLiveEdit manages the edit/save button, communicate with firebase to
@@ -27,119 +32,113 @@ type WidgetLiveEditProps = {
  */
 
  export const WidgetLiveEdit: React.FC<WidgetLiveEditProps> = ({
-   contentHash, currYear, pageToEdit, user, editing, setEditing, editedContent
+	 contentHash, currYear, pageToEdit, user, editing, setEditing, editedContent
  }) => {
+	 
+	let [editingState, setEditingState] = useState<EditingState>(EditingState.Safe);
+	let [message, setMessage] = useState<string>(SAFE);
 
-  enum EditingState {
-    Safe,
-    CurrentUser,
-    Unsafe
-  }
+	let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
 
-  let [editingState, setEditingState] = useState<EditingState>(EditingState.Safe);
-  let [message, setMessage] = useState<string>("safe to edit");
+	// update firebase with the current timestamp
+	const updateOnce = () => {
+		widgetRef.update({
+			timestamp: firebase.database.ServerValue.TIMESTAMP,
+			editor: (user && user.email) || "Unknown user",
+			saved: false
+		});
+	};
 
-  let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
+	useEffect(() => {
+		if (editing) {
+			// update database on a set interval if we're editing.
+			// if browser is closed unexpectedly, the last time we're still online
+			// will be recorded.
+			const updateInterval = setInterval(() => {
+				updateOnce();
+			}, LIVE_EDIT_REFRESH * 1000);
+			return () => clearInterval(updateInterval);
+		}
+	});
 
-  // update firebase with the current timestamp
-  const updateOnce = () => {
-    widgetRef.update({
-      timestamp: firebase.database.ServerValue.TIMESTAMP,
-      editor: (user && user.email) || "Unknown user",
-      saved: false
-    });
-  };
+	useEffect(() => {
+		// set up listener to firebase, re-render when updated
+		widgetRef.on('value', (snapshot) => {
+			let record = snapshot.val();
+			if (record) {
+				let diff: number = (Date.now() - record.timestamp) / 1000;
+				let saved: boolean = record.saved;
 
-  useEffect(() => {
-    if (editing) {
-      // update database on a set interval if we're editing.
-      // if browser is closed unexpectedly, the last time we're still online
-      // will be recorded.
-      const updateInterval = setInterval(() => {
-        updateOnce();
-      }, refreshInterval * 1000);
-      return () => clearInterval(updateInterval);
-    }
-  });
+				if (!saved && diff < LIVE_EDIT_TIMETOUT) {
+					// not saved and not yet timed out
+					let editorName = record.editor;
+					if (user && editorName == user.email) {
+						setEditingState(EditingState.CurrentUser);
+						setMessage(USER);
+					} else {
+						setEditingState(EditingState.Unsafe);
+						setMessage("currently edited by " + editorName);
+					}
+				} else {
+					// otherwise safe
+					setEditingState(EditingState.Safe);
+					setMessage(SAFE);
+				}
+			}
+		});
+	});
 
-  useEffect(() => {
-    // set up listener to firebase, re-render when updated
-    widgetRef.on('value', function(snapshot) {
-      let record = snapshot.val();
-      if (record) {
-        let diff: number = (Date.now() - record.timestamp) / 1000;
-        let saved: boolean = record.saved;
+	// determine banner style
+	let banner = <div
+		className={editingState == EditingState.Unsafe ?
+			"widget-live-edit-bar-unsafe" : "widget-live-edit-bar-safe"} >
+		{message}
+	</div>;
 
-        if (!saved && diff < firebaseTimeout) {
-          // not saved and not yet timed out
-          let editorName = record.editor;
-          if (user && editorName == user.email) {
-            setEditingState(EditingState.CurrentUser);
-            setMessage("currently edited by you");
-          } else {
-            setEditingState(EditingState.Unsafe);
-            setMessage("currently edited by " + editorName);
-          }
-        } else {
-          // otherwise safe
-          setEditingState(EditingState.Safe);
-          setMessage("safe to edit");
-        }
-      }
-    });
-  });
+	// determine which buttons to show
+	let button = editing ?
+		<Button variant="contained" color="primary"
+				onClick={async () => {
+						await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/content/${contentHash}`).set(editedContent);
+						await firebase.database().ref(`${currYear}/EditHistory/${pageToEdit}/${contentHash}`).push({
+								type: HistoryTypes.UPDATE,
+								timestamp: firebase.database.ServerValue.TIMESTAMP,
+								creator: (user && user.email) || "Unknown user",
+								content: editedContent
+						});
+						await widgetRef.update({
+								saved: true
+						});
+						setEditing(false);
+				}}>
+				Save
+		</Button> :
+		(editingState == EditingState.Unsafe ?
+		<><Button variant="contained" color="primary"
+			onClick={() => {
+				setEditing(true);
+				updateOnce();
+			}} disabled>
+			Edit
+		</Button>
+		<Button variant="contained" color="primary"
+			onClick={() => {
+				setEditing(true);
+				updateOnce();
+			}}>
+			Edit Anyway
+		</Button></> :
+		<Button variant="contained" color="primary"
+			onClick={() => {
+				setEditing(true);
+				updateOnce();
+			}} >
+			Edit
+		</Button>
+		);
 
-  // determine banner style
-  let banner = <div
-    className={editingState == EditingState.Unsafe ?
-      "widget-live-edit-bar-unsafe" : "widget-live-edit-bar-safe"} >
-    {message}
-  </div>;
-
-  // determine which buttons to show
-  let button = editing ?
-    <Button variant="contained" color="primary"
-        onClick={async () => {
-            await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/content/${contentHash}`).set(editedContent);
-            await firebase.database().ref(`${currYear}/EditHistory/${pageToEdit}/${contentHash}`).push({
-                type: HistoryTypes.UPDATE,
-                timestamp: firebase.database.ServerValue.TIMESTAMP,
-                creator: (user && user.email) || "Unknown user",
-                content: editedContent
-            });
-            await widgetRef.update({
-                saved: true
-            });
-            setEditing(false);
-        }}>
-        Save
-    </Button> :
-    (editingState == EditingState.Unsafe ?
-    <><Button variant="contained" color="primary"
-      onClick={() => {
-        setEditing(true);
-        updateOnce();
-      }} disabled>
-      Edit
-    </Button>
-    <Button variant="contained" color="primary"
-      onClick={() => {
-        setEditing(true);
-        updateOnce();
-      }}>
-      Edit Anyway
-    </Button></> :
-    <Button variant="contained" color="primary"
-      onClick={() => {
-        setEditing(true);
-        updateOnce();
-      }} >
-      Edit
-    </Button>
-    );
-
-  return <div>
-    {button}
-    {banner}
-  </div>
+	return <div>
+		{button}
+		{banner}
+	</div>
  }
