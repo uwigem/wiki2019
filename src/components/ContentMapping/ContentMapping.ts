@@ -5,6 +5,8 @@ import { Stub, StubEditor } from '../ContentWidgets/_Stub/Stub';
 import { ContentSingularData } from '../_data/ContentSingularData';
 import { ExampleImage } from '../ContentWidgets/ExampleImage/ExampleImage';
 import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageEditor';
+import { Banner } from '../ContentWidgets/Banner/Banner';
+import { BannerEditor } from '../ContentWidgets/Banner/BannerEditor';
 import { TabView } from '../ContentWidgets/TabView/TabView';
 import { TabViewEditor } from '../ContentWidgets/TabView/TabViewEditor';
 import { PdfViewer } from '../ContentWidgets/PdfViewer/PdfViewer';
@@ -18,6 +20,10 @@ import { SeparatorEditor } from '../ContentWidgets/Separator/SeparatorEditor';
 import { Gallery } from '../ContentWidgets/Gallery/Gallery';
 import { GalleryEditor } from '../ContentWidgets/Gallery/GalleryEditor';
 
+import { WYSIWYGEditor } from '../ContentWidgets/WYSIWYG/WYSIWYGEditor';
+import { WYSIWYGWidget } from '../ContentWidgets/WYSIWYG/WYSIWYGWidget';
+import { Accordion } from '../ContentWidgets/Accordion/Accordion';
+import { AccordionEditor } from '../ContentWidgets/Accordion/AccordionEditor';
 
 export type WidgetEditorProps = {
 	originalContent: ContentSingularData,
@@ -41,7 +47,10 @@ export enum WidgetTypes {
 	IMAGES_IN_ROW = "IMAGES_IN_ROW",
 	PDF_VIEWER = "PDF_VIEWER",
 	VIDEO = "VIDEO",
-	GALLERY = "GALLERY"
+	GALLERY = "GALLERY",
+	WYSIWYG_EDITOR = "WYSIWYG_EDITOR",
+	BANNER = "BANNER",
+	ACCORDION = "ACCORDION"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -81,4 +90,17 @@ export const ContentMapping: ContentMappingType = {
 				widget: Gallery,
 				editor: GalleryEditor
 		}
+	},
+	WYSIWYG_EDITOR: {
+		widget: WYSIWYGWidget,
+		editor: WYSIWYGEditor
+	},
+	BANNER: {
+		widget: Banner,
+		editor: BannerEditor
+	},
+	ACCORDION: {
+		widget: Accordion,
+		editor: AccordionEditor
+	}
 }

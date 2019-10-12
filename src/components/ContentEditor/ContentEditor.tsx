@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { ContentData, ContentHashMapping } from '../_data/Data';
+import { ContentData } from '../_data/Data';
 import { useAuth } from '../../hooks/useAuth';
 import './ContentEditor.css';
 import { ContentEditorBanner } from './ContentEditorBanner/ContentEditorBanner';
@@ -37,6 +37,29 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ contentData, currY
 
 	if (!firebase) {
 		return <></>
+	}
+
+	const deleteWidget = async (contentHash: string) => {
+		console.log(contentHash);
+		if (contentData && pageToEdit && contentData[pageToEdit]) {
+			let contentOrderNew: string[] = [...contentData[pageToEdit].contentOrder!];
+			let currHashIndex = contentOrderNew.indexOf(contentHash);
+			if (currHashIndex !== -1) {
+				contentOrderNew.splice(currHashIndex, 1);
+			}
+
+			try {
+				await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/contentOrder`).set(contentOrderNew);
+				await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/content/${contentHash}`).remove();
+				await firebase.database().ref(`${currYear}/EditHistory/${pageToEdit}/${contentHash}`).push({
+					type: HistoryTypes.DELETE,
+					timestamp: firebase.database.ServerValue.TIMESTAMP,
+					deletor: (user && user.email) || "Unknown user"
+				});
+			} catch (e) {
+				console.log(e);
+			}
+		}
 	}
 
 	if (!userLoading && contentData) {
@@ -77,7 +100,13 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ contentData, currY
 										console.log(e);
 									}
 								}} />
-								<WidgetEditor user={user} content={content} contentHash={contentHash} currYear={currYear} pageToEdit={pageToEdit} />
+								<WidgetEditor
+									user={user}
+									content={content}
+									contentHash={contentHash}
+									currYear={currYear}
+									pageToEdit={pageToEdit}
+									deleteWidget={deleteWidget} />
 							</React.Fragment>
 						})}
 					<AddNewWidgetButton onClick={async () => {
@@ -104,7 +133,7 @@ export const ContentEditor: React.FC<ContentEditorProps> = ({ contentData, currY
 				</> :
 				<>
 					Please select a page to modify above
-				</>
+                </>
 			}
 		</>
 	} else {

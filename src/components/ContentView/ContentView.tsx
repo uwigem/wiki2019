@@ -23,7 +23,7 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
 		if (!equal(content, contentData)) {
 			setContent({ ...contentData } as ContentData)
 		}
-	}, [contentData]);
+	}, [content, contentData]);
 
 	let pageString = pageTitle === "" ? "MAIN_PAGE_DO_NOT_EDIT" :
 		pageTitle.substring(1, pageTitle.length);
