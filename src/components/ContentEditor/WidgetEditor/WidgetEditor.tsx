@@ -12,7 +12,8 @@ type WidgetEditorProps = {
 	contentHash: string,
 	currYear: number,
 	pageToEdit: string,
-	user: firebase.User | null
+	user: firebase.User | null,
+	deleteWidget: (contentHash: string) => void
 }
 
 /**
@@ -31,7 +32,7 @@ type WidgetEditorProps = {
  *  - Make edithistory be its own class
  */
 export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash, currYear,
-	pageToEdit, user }) => {
+	pageToEdit, user, deleteWidget }) => {
 	const [editing, setEditing] = useState<boolean>(false);
 	const [editedContent, setEditedContent] = useState<ContentSingularData>({ ...content } as ContentSingularData);
 	const { firebase } = useContext(EnvironmentContext);
@@ -40,12 +41,13 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 		if (!equal(content, editedContent)) {
 			setEditedContent({ ...content } as ContentSingularData);
 		}
-	}, [content])
+	}, [content /** WHATEVER THE YELLOW ERROR SAYS, DO NOT ADD `editedContent` HERE. It makes the editor not work */])
 
 
 	if (!content || !firebase) {
 		return <></>;
 	}
+
 	let ContentWidget = ContentMapping[editedContent.type].widget;
 	let ContentEditingWidget = ContentMapping[editedContent.type].editor;
 	return <div className="widget-editor">
@@ -54,41 +56,41 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 			<div>
 				<Button variant="contained" color="primary"
 					onClick={() => setEditing(true)}>Edit</Button>
+				<Button variant="contained" color="primary"
+					onClick={() => deleteWidget(contentHash)}>Delete</Button>
 			</div>
 		</>}
 
 		{editing && <>
-			<div>
-				<div className="widget-picker">
-					<form>
-						<fieldset>
-							<legend>Select a Widget</legend>
-							<select
-								value={editedContent.type}
-								onChange={(e) => {
-									setEditedContentOnChange("type", e.target.value as string, editedContent, setEditedContent);
-								}}>
-								<option value="" disabled selected>-- Select a Widget --</option>
-								{/* display Widget Categories and Widgets in dropdown, sorted alphabetically */}
-								{Object.keys(WidgetCategories).map((category) => {
-									const categoryWidgets = Object.keys(ContentMapping).filter(widgetKey => ContentMapping[widgetKey].widgetCategory === category)
-									categoryWidgets.sort();
-									if (categoryWidgets.length > 0) {
-										return <optgroup label={category}>
-											{categoryWidgets.map((widgetKey) => {
-												return <option key={widgetKey} value={widgetKey}>
-													{ContentMapping[widgetKey].displayName}
-												</option>
-											})}
-										</optgroup>
-									} else {
-										return <></>
-									}
-								})}
-							</select>
-						</fieldset>
-					</form>
-				</div>
+			<div className="widget-picker">
+				<form>
+					<fieldset>
+						<legend>Select a Widget</legend>
+						<select
+							value={editedContent.type}
+							onChange={(e) => {
+								setEditedContentOnChange("type", e.target.value as string, editedContent, setEditedContent);
+							}}>
+							<option value="" disabled selected>-- Select a Widget --</option>
+							{/* display Widget Categories and Widgets in dropdown, sorted alphabetically */}
+							{Object.keys(WidgetCategories).map((category) => {
+								const categoryWidgets = Object.keys(ContentMapping).filter(widgetKey => ContentMapping[widgetKey].widgetCategory === category)
+								categoryWidgets.sort();
+								if (categoryWidgets.length > 0) {
+									return <optgroup label={category}>
+										{categoryWidgets.map((widgetKey) => {
+											return <option key={widgetKey} value={widgetKey}>
+												{ContentMapping[widgetKey].displayName}
+											</option>
+										})}
+									</optgroup>
+								} else {
+									return <></>
+								}
+							})}
+						</select>
+					</fieldset>
+				</form>
 			</div>
 			<ContentEditingWidget editedContent={editedContent}
 				originalContent={content}
