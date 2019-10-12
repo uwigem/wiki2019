@@ -9,3 +9,7 @@
 	background-color: orange;
 	text-align: center;
 }
+
+.widget-editor-padding-left {
+	margin-left: 5px;
+}

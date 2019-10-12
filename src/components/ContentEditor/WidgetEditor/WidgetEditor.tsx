@@ -66,9 +66,8 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 					user={user}
 					editing={false}
 					setEditing={setEditing}
-					editedContent={editedContent} />
-				<Button variant="contained" color="primary"
-					onClick={() => deleteWidget(contentHash)}>Delete</Button>
+					editedContent={editedContent}
+					deleteWidget={deleteWidget} />
 			</div>
 		</>}
 
@@ -102,7 +101,8 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 					user={user}
 					editing={true}
 					setEditing={setEditing}
-					editedContent={editedContent} />
+					editedContent={editedContent}
+					deleteWidget={deleteWidget} />
 			</div>
 		</>}
 	</div>
