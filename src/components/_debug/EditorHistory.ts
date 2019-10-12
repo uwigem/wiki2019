@@ -1,4 +1,4 @@
 export enum HistoryTypes {
-    CREATION = "CREATION",
-    UPDATE = "UPDATE"
+	CREATION = "CREATION",
+	UPDATE = "UPDATE"
 }
