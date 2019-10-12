@@ -39,8 +39,8 @@ export enum WidgetTypes {
 	SEPARATOR = "SEPARATOR",
 	IMAGES_IN_ROW = "IMAGES_IN_ROW",
 	PDF_VIEWER = "PDF_VIEWER",
-    VIDEO = "VIDEO",
-    WYSIWYG_EDITOR = "WYSIWYG_EDITOR"
+	VIDEO = "VIDEO",
+	WYSIWYG_EDITOR = "WYSIWYG_EDITOR"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -75,10 +75,10 @@ export const ContentMapping: ContentMappingType = {
 	VIDEO: {
 		widget: Video,
 		editor: VideoEditor
-    },
-    WYSIWYG_EDITOR: {
-        widget: WYSIWYGWidget,
-        editor: WYSIWYGEditor
-    }
+	},
+	WYSIWYG_EDITOR: {
+		widget: WYSIWYGWidget,
+		editor: WYSIWYGEditor
+	}
 }
 

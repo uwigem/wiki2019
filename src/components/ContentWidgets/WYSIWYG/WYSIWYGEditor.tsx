@@ -8,22 +8,22 @@ import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 
 export const WYSIWYGEditor: React.FC<WidgetEditorProps> = ({
-    editedContent,
-    setEditedContentOnChange
+	editedContent,
+	setEditedContentOnChange
 }) => {
-    
-    const contentState = editedContent.wysiwyg_content ?
-    convertToRaw(ContentState.createFromBlockArray(htmlToDraft(editedContent.wysiwyg_content).contentBlocks)) :
-    convertToRaw(EditorState.createEmpty().getCurrentContent());
 
-    return <>
-        <Editor
-            initialContentState={contentState}
-            wrapperClassName="wysiwyg-wrapper"
-            editorClassName="wysiwyg-editor"
-            onContentStateChange={(e) => 
-                setEditedContentOnChange("wysiwyg_content", draftToHtml(e))
-            }
-        />
-    </>
+	const contentState = editedContent.wysiwyg_content ?
+		convertToRaw(ContentState.createFromBlockArray(htmlToDraft(editedContent.wysiwyg_content).contentBlocks)) :
+		convertToRaw(EditorState.createEmpty().getCurrentContent());
+
+	return <>
+		<Editor
+			initialContentState={contentState}
+			wrapperClassName="wysiwyg-wrapper"
+			editorClassName="wysiwyg-editor"
+			onContentStateChange={(e) =>
+				setEditedContentOnChange("wysiwyg_content", draftToHtml(e))
+			}
+		/>
+	</>
 }
