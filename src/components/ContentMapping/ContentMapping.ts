@@ -5,6 +5,8 @@ import { Stub, StubEditor } from '../ContentWidgets/_Stub/Stub';
 import { ContentSingularData } from '../_data/ContentSingularData';
 import { ExampleImage } from '../ContentWidgets/ExampleImage/ExampleImage';
 import { ExampleImageEditor } from '../ContentWidgets/ExampleImage/ExampleImageEditor';
+import { Banner } from '../ContentWidgets/Banner/Banner';
+import { BannerEditor } from '../ContentWidgets/Banner/BannerEditor';
 import { TabView } from '../ContentWidgets/TabView/TabView';
 import { TabViewEditor } from '../ContentWidgets/TabView/TabViewEditor';
 import { PdfViewer } from '../ContentWidgets/PdfViewer/PdfViewer';
@@ -17,6 +19,8 @@ import { Separator } from '../ContentWidgets/Separator/Separator';
 import { SeparatorEditor } from '../ContentWidgets/Separator/SeparatorEditor';
 import { WYSIWYGEditor } from '../ContentWidgets/WYSIWYG/WYSIWYGEditor';
 import { WYSIWYGWidget } from '../ContentWidgets/WYSIWYG/WYSIWYGWidget';
+import { Accordion } from '../ContentWidgets/Accordion/Accordion';
+import { AccordionEditor } from '../ContentWidgets/Accordion/AccordionEditor';
 
 export type WidgetEditorProps = {
 	originalContent: ContentSingularData,
@@ -40,7 +44,9 @@ export enum WidgetTypes {
 	IMAGES_IN_ROW = "IMAGES_IN_ROW",
 	PDF_VIEWER = "PDF_VIEWER",
 	VIDEO = "VIDEO",
-	WYSIWYG_EDITOR = "WYSIWYG_EDITOR"
+	WYSIWYG_EDITOR = "WYSIWYG_EDITOR",
+	BANNER = "BANNER",
+	ACCORDION = "ACCORDION"
 }
 
 export const ContentMapping: ContentMappingType = {
@@ -79,6 +85,14 @@ export const ContentMapping: ContentMappingType = {
 	WYSIWYG_EDITOR: {
 		widget: WYSIWYGWidget,
 		editor: WYSIWYGEditor
+	},
+	BANNER: {
+		widget: Banner,
+		editor: BannerEditor
+	},
+	ACCORDION: {
+		widget: Accordion,
+		editor: AccordionEditor
 	}
 }
 

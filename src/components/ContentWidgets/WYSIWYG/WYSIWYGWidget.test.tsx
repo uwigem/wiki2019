@@ -18,7 +18,7 @@ describe("WYSIWYGWidget component", () => {
 		expect(wrapper.find(Editor)).toHaveLength(0);
 	});
 
-	it("mounts correctly with empty content", () => {
+	it.skip("mounts correctly with empty content", () => {
 		const wrapper = mount(<WYSIWYGWidget wysiwyg_state={fakeContent.wysiwyg_state} />);
 		expect(wrapper.find(Editor)).toHaveLength(1);
 	});
