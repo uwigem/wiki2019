@@ -85,11 +85,10 @@ export const ContentMapping: ContentMappingType = {
 	VIDEO: {
 		widget: Video,
 		editor: VideoEditor
-		},
-		GALLERY: {
-				widget: Gallery,
-				editor: GalleryEditor
-		}
+	},
+	GALLERY: {
+		widget: Gallery,
+		editor: GalleryEditor
 	},
 	WYSIWYG_EDITOR: {
 		widget: WYSIWYGWidget,
