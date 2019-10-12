@@ -73,6 +73,7 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 							}}>
 							<option value="" disabled selected>-- Select a Widget --</option>
 							{/* display Widget Categories and Widgets in dropdown, sorted alphabetically */}
+							{/* TODO: Optimize dropdown organizing for a better time complexity */}
 							{Object.keys(WidgetCategories).map((category) => {
 								const categoryWidgets = Object.keys(ContentMapping).filter(widgetKey => ContentMapping[widgetKey].widgetCategory === category)
 								categoryWidgets.sort();
