@@ -65,15 +65,14 @@ type WidgetLiveEditProps = {
   useEffect(() => {
     // set up listener to firebase, re-render when updated
     widgetRef.on('value', function(snapshot) {
-      if (snapshot.val()) {
-        console.log("listener heard a change");
-        let diff: number = (Date.now() - snapshot.val().timestamp) / 1000;
-        let saved: boolean = snapshot.val().saved;
-        console.log("time diff: " + diff);
+      let record = snapshot.val();
+      if (record) {
+        let diff: number = (Date.now() - record.timestamp) / 1000;
+        let saved: boolean = record.saved;
 
         if (!saved && diff < firebaseTimeout) {
           // not saved and not yet timed out
-          let editorName = snapshot.val().editor;
+          let editorName = record.editor;
           if (user && editorName == user.email) {
             setEditingState(EditingState.CurrentUser);
             setMessage("currently edited by you");
