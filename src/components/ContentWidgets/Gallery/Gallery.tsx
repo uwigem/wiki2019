@@ -2,6 +2,31 @@ import React, { useState } from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
 import './Gallery.css';
 
+type galleryColProps = {
+    images: string[],
+    first: number,
+    last: number,
+    setCurrentIndex: React.Dispatch<React.SetStateAction<number>>,
+    setDisplayState: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const GalleryCol: React.FC<galleryColProps> = ({
+    images, first, last, setCurrentIndex, setDisplayState
+}) => {
+    const columnContent = [];
+    for (let i = first; i < last; i++) {
+        columnContent.push(<img 
+            className="gallery-image" 
+            src={images[i]}
+            onClick={() => {
+                setCurrentIndex(i);
+                setDisplayState(true);
+            }}/>)
+    }
+    return <div className="gallery-col">{columnContent}</div>;
+}
+
+
 type galleryImagesProps = {
     images: string[];
 }
@@ -14,23 +39,29 @@ const GalleryImages: React.FC<galleryImagesProps> = ({
     var [displayState, setDisplayState] = useState(false);
     const n = Math.ceil(images.length / COLUMN_NUMBER);
 
-    const columnContent = [];
-    for(let col = 0; col < COLUMN_NUMBER; col++) {
-        let rowContent = [];
-        for (let index = n*col; index < n*(col+1); index++) {
-            rowContent.push(<img 
-                className="gallery-image" 
-                src={images[index]}
-                onClick={() => {
-                    setCurrentIndex(index);
-                    setDisplayState(true);
-                }}/>)
-        }
-        columnContent.push(<div className="gallery-col">{rowContent}</div>);
-    }
     return <div className="gallery-display">
-        {columnContent}
-        
+        <GalleryCol 
+        images={images}
+        first={0}
+        last={n}
+        setCurrentIndex={setCurrentIndex}
+        setDisplayState={setDisplayState}
+        ></GalleryCol>
+        <GalleryCol 
+        images={images}
+        first={n}
+        last={2*n}
+        setCurrentIndex={setCurrentIndex}
+        setDisplayState={setDisplayState}
+        ></GalleryCol>
+        <GalleryCol 
+        images={images}
+        first={2*n}
+        last={images.length}
+        setCurrentIndex={setCurrentIndex}
+        setDisplayState={setDisplayState}
+        ></GalleryCol>
+
         <div 
             className="gallery-lightbox" 
             style={{display: displayState? "block" : "none"}}>
