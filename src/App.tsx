@@ -10,13 +10,9 @@ import { LoadingScreen } from './components/LoadingScreen/LoadingScreen';
 import { CustomAppBar } from './components/CustomAppBar/CustomAppBar';
 import { DebugFonts } from './components/_debug/DebugFonts';
 import { ContentView } from './components/ContentView/ContentView';
+import { NavigationBottom } from './components/NavigationBottom/NavigationBottom';
 import "./App.css";
 import { FONT_FAMILY } from './components/_data/Constants';
-
-// comment out for production build
-// import 'firebase/auth';
-// import 'firebase/database';
-
 
 // This line is to remove a bug that Firefox has
 // TODO: insert link explaining why
@@ -48,7 +44,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 	let imgsToPrefetch: string[] = Data.getImgsToPrefetch();
 	let imgsLoaded = 0;
 
-	const displayConstants = Data.getDisplayConstants(pageTitle);
+	const displayConstants = Data.getDisplayConstants();
 	const theme = createMuiTheme({
 		palette: {
 			primary: {
@@ -197,6 +193,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 							<ContentView contentData={contentData} pageTitle={pageTitle} />
 						}
 					</div>
+					<NavigationBottom name={name} pageTitle={pageTitle} a={a} />
 					<Footbar a={a} />
 				</>}
 
