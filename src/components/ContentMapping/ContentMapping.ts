@@ -17,6 +17,9 @@ import { ImagesInRow } from '../ContentWidgets/ImagesInRow/ImagesInRow';
 import { ImagesInRowEditor } from '../ContentWidgets/ImagesInRow/ImagesInRowEditor';
 import { Separator } from '../ContentWidgets/Separator/Separator';
 import { SeparatorEditor } from '../ContentWidgets/Separator/SeparatorEditor';
+import { Gallery } from '../ContentWidgets/Gallery/Gallery';
+import { GalleryEditor } from '../ContentWidgets/Gallery/GalleryEditor';
+
 import { WYSIWYGEditor } from '../ContentWidgets/WYSIWYG/WYSIWYGEditor';
 import { WYSIWYGWidget } from '../ContentWidgets/WYSIWYG/WYSIWYGWidget';
 import { Accordion } from '../ContentWidgets/Accordion/Accordion';
@@ -52,29 +55,24 @@ export enum WidgetTypes {
 	IMAGES_IN_ROW = "IMAGES_IN_ROW",
 	PDF_VIEWER = "PDF_VIEWER",
 	VIDEO = "VIDEO",
+	GALLERY = "GALLERY",
 	WYSIWYG_EDITOR = "WYSIWYG_EDITOR",
 	BANNER = "BANNER",
 	ACCORDION = "ACCORDION"
 }
 
 export const ContentMapping: ContentMappingType = {
-	PLAIN_TEXT: {
-		widget: PlainText,
-		editor: PlainTextEditor,
-		displayName: "Plain Text",
-		widgetCategory: WidgetCategories.Text
-	},
+	// PLAIN_TEXT: {
+	// 	widget: PlainText,
+	// 	editor: PlainTextEditor,
+	// 	displayName: "Plain Text",
+	// 	widgetCategory: WidgetCategories.Text
+	// },
 	STUB: {
 		widget: Stub,
 		editor: StubEditor,
 		displayName: "Stub",
 		widgetCategory: WidgetCategories.Display
-	},
-	EXAMPLE_IMAGE: {
-		widget: ExampleImage,
-		editor: ExampleImageEditor,
-		displayName: "Example Image",
-		widgetCategory: WidgetCategories.Media
 	},
 	TAB_VIEW: {
 		widget: TabView,
@@ -98,7 +96,7 @@ export const ContentMapping: ContentMappingType = {
 		widget: PdfViewer,
 		editor: PdfViewerEditor,
 		displayName: "PDF Viewer",
-		widgetCategory: WidgetCategories.Text
+		widgetCategory: WidgetCategories.Media
 	},
 	VIDEO: {
 		widget: Video,
@@ -106,10 +104,16 @@ export const ContentMapping: ContentMappingType = {
 		displayName: "Video",
 		widgetCategory: WidgetCategories.Media
 	},
+	GALLERY: {
+		widget: Gallery,
+		editor: GalleryEditor,
+		displayName: "Gallery",
+		widgetCategory: WidgetCategories.Media
+	},
 	WYSIWYG_EDITOR: {
 		widget: WYSIWYGWidget,
 		editor: WYSIWYGEditor,
-		displayName: "WYSIWYG Editor",
+		displayName: "Rich Text Editor",
 		widgetCategory: WidgetCategories.Text
 	},
 	BANNER: {
@@ -125,4 +129,3 @@ export const ContentMapping: ContentMappingType = {
 		widgetCategory: WidgetCategories.Display
 	}
 }
-

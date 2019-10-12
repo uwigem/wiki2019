@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
-import Button from '@material-ui/core/Button';
 import './WidgetEditor.css';
 import { WidgetCategories, ContentMapping } from '../../ContentMapping/ContentMapping';
-import { HistoryTypes } from '../../_debug/EditorHistory';
+import './WidgetEditor.css';
 import equal from 'deep-equal';
 import { EnvironmentContext } from '../../../contexts/EnvironmentContext/EnvironmentContext';
+import { WidgetLiveEdit } from '../WidgetLiveEdit/WidgetLiveEdit';
 
 type WidgetEditorProps = {
 	content: ContentSingularData | undefined,
@@ -54,10 +54,15 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 		{!editing && <>
 			<ContentWidget {...editedContent} />
 			<div>
-				<Button variant="contained" color="primary"
-					onClick={() => setEditing(true)}>Edit</Button>
-				<Button variant="contained" color="primary"
-					onClick={() => deleteWidget(contentHash)}>Delete</Button>
+				<WidgetLiveEdit
+					contentHash={contentHash}
+					currYear={currYear}
+					pageToEdit={pageToEdit}
+					user={user}
+					editing={false}
+					setEditing={setEditing}
+					editedContent={editedContent}
+					deleteWidget={deleteWidget} />
 			</div>
 		</>}
 
@@ -99,19 +104,15 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 					setEditedContentOnChange(keyToChange, valueToChange, editedContent, setEditedContent);
 				}} />
 			<div>
-				<Button variant="contained" color="primary"
-					onClick={async () => {
-						await firebase.database().ref(`${currYear}/ContentData/${pageToEdit}/content/${contentHash}`).set(editedContent);
-						await firebase.database().ref(`${currYear}/EditHistory/${pageToEdit}/${contentHash}`).push({
-							type: HistoryTypes.UPDATE,
-							timestamp: firebase.database.ServerValue.TIMESTAMP,
-							creator: (user && user.email) || "Unknown user",
-							content: editedContent
-						});
-						setEditing(false);
-					}}>
-					Save
-                </Button>
+				<WidgetLiveEdit
+					contentHash={contentHash}
+					currYear={currYear}
+					pageToEdit={pageToEdit}
+					user={user}
+					editing={true}
+					setEditing={setEditing}
+					editedContent={editedContent}
+					deleteWidget={deleteWidget} />
 			</div>
 		</>}
 	</div>
