@@ -1,7 +1,8 @@
 import { BannerContent } from '../ContentWidgets/Banner/Banner';
 import { Tab } from '../ContentWidgets/TabView/TabView';
 import { ImgRowItem } from '../ContentWidgets/ImagesInRow/ImagesInRow';
-import { AccordionPageProps } from '../ContentWidgets/Accordion/Accordion'
+import { AccordionPageProps } from '../ContentWidgets/Accordion/Accordion';
+import { Person } from '../ContentWidgets/TeamPage/TeamPage'; 
 
 export type ContentSingularData = {
 	[idx: string]: any
@@ -19,5 +20,7 @@ export type ContentSingularData = {
 	separator_width?: number
 	separator_color?: { r: number; g: number; b: number }
 	tabView_content?: Tab[]
-	wysiwyg_content?: string
+    wysiwyg_content?: string
+    teamPage_content?: Person[]
+    teamPage_personToEdit?: Person
 }
