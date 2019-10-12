@@ -24,7 +24,7 @@ type AppProps = {
 	firebase?: any,
 	ContentEditor: React.FC<ContentEditorProps>
 }
-const debugURL = "/wkwokTestPage";
+const debugURL = "/Editor";
 
 /**
  * App is the main application that handles all the route logic and rendering.
@@ -193,7 +193,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 							<ContentView contentData={contentData} pageTitle={pageTitle} />
 						}
 					</div>
-                    <NavigationBottom name={name} pageTitle={pageTitle} a={a}/>
+					<NavigationBottom name={name} pageTitle={pageTitle} a={a} />
 					<Footbar a={a} />
 				</>}
 
