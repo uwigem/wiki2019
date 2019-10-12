@@ -198,7 +198,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 							<ContentView contentData={contentData} pageTitle={pageTitle} />
 						}
 					</div>
-                    <NavigationBottom name={name} pageTitle={pageTitle} a={a}></NavigationBottom>
+                    <NavigationBottom name={name} pageTitle={pageTitle} a={a}/>
 					<Footbar a={a} />
 				</>}
 
