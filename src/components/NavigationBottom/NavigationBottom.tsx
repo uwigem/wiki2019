@@ -1,7 +1,8 @@
 import React from 'react';
 import NavbarData, { NavbarType } from '../_data/NavbarData/NavbarData';
 import './NavigationBottom.css';
-import { ArrowLeftCircle, ArrowRightCircle } from 'react-feather';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 
 type NavBottomProps = {
     name: string,
@@ -24,7 +25,7 @@ export const NavigationBottom: React.FC<NavBottomProps> = ({
     }
 
     let pageIndex = -1;
-    let navItemData:NavbarType = NavbarData.getData()[0];
+    let navItemData: NavbarType = NavbarData.getData()[0];
     NavbarData.getData().forEach((navItem: NavbarType) => {
         let i = navItem.links.indexOf(pageTitle)
         if (i > -1) {
@@ -43,7 +44,10 @@ export const NavigationBottom: React.FC<NavBottomProps> = ({
                 <a 
                 href={name + navItemData.links[pageIndex - 1]}
                 onClick={a}>
-                    <ArrowLeftCircle color="black"></ArrowLeftCircle>
+                    <FontAwesomeIcon
+                        icon={faArrowCircleLeft}
+                        color="black" 
+                        size="lg"></FontAwesomeIcon>
                     {navItemData.names[pageIndex - 1]}
                 </a>
             }
@@ -53,8 +57,11 @@ export const NavigationBottom: React.FC<NavBottomProps> = ({
                 <a 
                 href={name + navItemData.links[pageIndex + 1]}
                 onClick={a}>
-                    <ArrowRightCircle color="black"></ArrowRightCircle>
                     {navItemData.names[pageIndex + 1]}
+                    <FontAwesomeIcon 
+                        icon={faArrowCircleRight}  
+                        color="black" 
+                        size="lg"></FontAwesomeIcon>
                 </a>
             }
         </div>
