@@ -8,7 +8,7 @@ import './WidgetLiveEdit.css';
 // if last edit is older than this (in seconds) regard it as not being edited
 let firebaseTimeout = 60;
 // how frequenty the client should update firebase with a new timestamp
-var refreshInterval = 45;
+let refreshInterval = 45;
 
 type WidgetLiveEditProps = {
   contentHash: string,
@@ -40,7 +40,6 @@ type WidgetLiveEditProps = {
   let [message, setMessage] = useState<string>("safe to edit");
 
   let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
-
 
   // update firebase with the current timestamp
   const updateOnce = () => {
