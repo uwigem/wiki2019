@@ -48,7 +48,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 	let imgsToPrefetch: string[] = Data.getImgsToPrefetch();
 	let imgsLoaded = 0;
 
-	const displayConstants = Data.getDisplayConstants(pageTitle);
+	const displayConstants = Data.getDisplayConstants();
 	const theme = createMuiTheme({
 		palette: {
 			primary: {
