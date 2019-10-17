@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { ContentData } from '../_data/Data';
 import { ContentMapping } from '../../components/ContentMapping/ContentMapping';
 import equal from 'deep-equal';
@@ -19,7 +19,7 @@ export type ContentViewProps = {
  * William Kwok 
  */
 export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle }) => {
-	const [content, setContent] = useState<ContentData>({ ...contentData } as ContentData);
+  const [content, setContent] = useState<ContentData>({ ...contentData } as ContentData);
 
 	useEffect(() => {
 		if (!equal(content, contentData)) {

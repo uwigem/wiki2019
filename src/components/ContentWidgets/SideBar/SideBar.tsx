@@ -113,5 +113,4 @@ export const SideBar: React.FC<SideBarProps> = ({
 		</ul>
 		<div id="sidebar-progress"><span style={{ height: progress + "%" }}>&nbsp;</span></div>
 	</div>;
-
 }
