@@ -31,6 +31,11 @@
 
 /** RESET CODE HERE. SCROLL DOWN FOR DESIGN GUIDELINE STUFF */
 
+ul {
+	list-style-image: none !important;
+	margin: 0 !important;
+}
+
 a {
 	outline: 0;
 }
