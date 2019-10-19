@@ -13,6 +13,7 @@ import { ContentView } from './components/ContentView/ContentView';
 import { NavigationBottom } from './components/NavigationBottom/NavigationBottom';
 import "./App.css";
 import { FONT_FAMILY } from './components/_data/Constants';
+import { HardCodedMainPage } from './components/HardcodedMainPage/HardCodedMainPage';
 
 // This line is to remove a bug that Firefox has
 // TODO: insert link explaining why
@@ -24,7 +25,7 @@ type AppProps = {
 	firebase?: any,
 	ContentEditor: React.FC<ContentEditorProps>
 }
-const debugURL = "/MAIN_PAGE";
+const debugURL = "/Editor";
 
 /**
  * App is the main application that handles all the route logic and rendering.
@@ -161,7 +162,7 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 							/>}
 						{/*****************************************/}
 						{pageTitle !== "/Editor"
-							&& (pageTitle === "" || pageTitle === "/Description") &&
+							&& (pageTitle === "/Description") &&
 							<div className="main-temporary">
 								{pageTitle !== '/Description' &&
 									<div>
@@ -189,8 +190,8 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
                                 </p>
 							</div>}
 						{pageTitle !== "/Editor"
-							&& pageTitle === "/MAIN_PAGE" &&
-							<div>Test</div>}
+							&& pageTitle === "" &&
+							<HardCodedMainPage a={a} />}
 						{/*****************************************/}
 						{pageTitle !== "/Editor" && pageTitle !== "" && pageTitle !== "/MAIN_PAGE" &&
 							<ContentView contentData={contentData} pageTitle={pageTitle} />
