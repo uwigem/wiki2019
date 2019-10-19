@@ -61,7 +61,7 @@ export const TeamPageEditor: React.FC<WidgetEditorProps> = ({
     });
 
     return <>
-        <Grid fluid style={{ padding: 0, margin: 20, marginTop: 30, marginBottom: 20 }}>
+        {/* <Grid fluid style={{ padding: 0, margin: 20, marginTop: 30, marginBottom: 20 }}>
             <Fade clear cascade>
                 <Row style={{ padding: 0, margin: 'auto', textAlign: 'center' }}>
                     {this.filteredCategories.sort().map((d, i) => {
@@ -81,7 +81,7 @@ export const TeamPageEditor: React.FC<WidgetEditorProps> = ({
             return <div key={'sect' + sectIndex} style={{ marginBottom: 20 }}>
                 <div style={{ margin: 'auto', width: '100%', textAlign: 'center', fontSize: 50 }}>{sect}</div>
                 <Grid fluid style={{ padding: 0, margin: 0 }}>
-                    {/* <Fade clear cascade> */}
+                    
                     <Row style={{ padding: 0, margin: 0 }} center="xs">
                         {data && data.map((d, i) => {
                             let filter;
@@ -219,7 +219,7 @@ export const TeamPageEditor: React.FC<WidgetEditorProps> = ({
                         })}
                     </Row>
                 </Grid>
-            </div>
+            </div> */}
         })}
         {/* <h3>Person to Edit</h3>
         <div>
