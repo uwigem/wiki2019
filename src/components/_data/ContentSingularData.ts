@@ -2,7 +2,7 @@ import { BannerContent } from '../ContentWidgets/Banner/Banner';
 import { Tab } from '../ContentWidgets/TabView/TabView';
 import { ImgRowItem } from '../ContentWidgets/ImagesInRow/ImagesInRow';
 import { AccordionPageProps } from '../ContentWidgets/Accordion/Accordion';
-import { Person } from '../ContentWidgets/TeamPage/TeamPage'; 
+import { Person } from '../ContentWidgets/TeamPage/TeamPage';
 
 export type ContentSingularData = {
 	[idx: string]: any
@@ -17,10 +17,11 @@ export type ContentSingularData = {
 	video_videoLink?: string
 	video_videoWidthPercentage?: number
 	imagesInRow_items?: ImgRowItem[]
-	separator_width?: number
+	separator_width?: number | string
 	separator_color?: { r: number; g: number; b: number }
 	tabView_content?: Tab[]
-    wysiwyg_content?: string
-    teamPage_content?: Person[]
-    teamPage_personToEdit?: Person
+	wysiwyg_content?: string
+	teamPage_content?: Person[]
+	teamPage_personToEdit?: Person
+	gallery_content?: string[]
 }

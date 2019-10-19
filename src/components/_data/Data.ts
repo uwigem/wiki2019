@@ -11,22 +11,8 @@ export default class Data {
 		return contentData;
 	}
 
-	static getDisplayConstants(pageTitle: string) {
-		if (displayConstants.globalColor) {
-			return displayConstants;
-		} else {
-			let pageSpecificString = this.getNavbarDataTitleFromLink(pageTitle);
-			if (pageSpecificString === "") {
-				return displayConstants;
-			} else {
-				let specificPage = displayConstants.pageSpecificColors[pageSpecificString];
-				if (specificPage) {
-					return specificPage;
-				} else {
-					return displayConstants;
-				}
-			}
-		}
+	static getDisplayConstants() {
+		return displayConstants;
 	}
 
 	static getNavbarDataTitleFromLink(pageTitle: string): string {
@@ -93,14 +79,4 @@ const displayConstants: DisplayConstants = {
 }
 
 const contentData: ContentData = {
-	"MAIN_PAGE": {
-		hasSidebar: false,
-		contentOrder: ["123"],
-		content: {
-			"123": {
-				type: "PLAIN_TEXT",
-				plainText_content: "test"
-			}
-		}
-	}
 }
