@@ -28,7 +28,7 @@ type AppProps = {
 	firebase?: any,
 	ContentEditor: React.FC<ContentEditorProps>
 }
-const debugURL = "/Sponsors";
+const debugURL = "/Team";
 
 /**
  * App is the main application that handles all the route logic and rendering.

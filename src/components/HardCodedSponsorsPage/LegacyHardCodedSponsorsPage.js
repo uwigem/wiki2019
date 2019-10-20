@@ -161,7 +161,7 @@ export class Sponsors extends Component {
 									transition: 'height 0.5s',
 									maxWidth: 380,
 									minWidth: 280,
-								}}><a href={d.LINK ? d.LINK : '#'} target="_blank">
+								}}><a href={d.LINK ? d.LINK : '#'} rel="noopener noreferrer" target="_blank">
 										<div style={{
 											width: '100%',
 											maxWidth: 380,

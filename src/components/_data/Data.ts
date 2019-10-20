@@ -35,7 +35,43 @@ export default class Data {
 	}
 }
 
-const imgs: string[] = [];
+const imgs: string[] = [
+	"https://2019.igem.org/wiki/images/5/51/T--Washington--WilliamKwok.jpg",
+	"https://2019.igem.org/wiki/images/c/c5/T--Washington--AnastasiaNicolov.jpg",
+	"https://2019.igem.org/wiki/images/8/8e/T--Washington--AngieDang.jpg",
+	"https://2019.igem.org/wiki/images/3/35/T--Washington--ChiTruong.jpg",
+	"https://2019.igem.org/wiki/images/2/2f/T--Washington--ClaraToo.jpg",
+	"https://2019.igem.org/wiki/images/6/61/T--Washington--DelaneyWilde.jpg",
+	"https://2019.igem.org/wiki/images/8/8d/T--Washington--ElgeneQuitevis.jpg",
+	"https://2019.igem.org/wiki/images/4/41/T--Washington--ElisaTruong.jpg",
+	"https://2019.igem.org/wiki/images/f/f2/T--Washington--EllenXu.jpg",
+	"https://2019.igem.org/wiki/images/9/9e/T--Washington--EricYeh.jpg",
+	"https://2019.igem.org/wiki/images/5/52/T--Washington--IshiraParikh.jpg",
+	"https://2019.igem.org/wiki/images/8/81/T--Washington--JayYung.jpg",
+	"https://2019.igem.org/wiki/images/5/53/T--Washington--JenniferTao.jpg",
+	"https://2019.igem.org/wiki/images/7/72/T--Washington--JerryCao.jpg",
+	"https://2019.igem.org/wiki/images/0/08/T--Washington--JoanneWong.jpg",
+	"https://2019.igem.org/wiki/images/d/d9/T--Washington--HLogo1.png",
+	"https://2019.igem.org/wiki/images/6/65/T--Washington--MonetToschBerneburg.jpg",
+	"https://2019.igem.org/wiki/images/d/d9/T--Washington--HLogo1.png",
+	"https://2019.igem.org/wiki/images/8/8b/T--Washington--AllisonLee.jpg",
+	"https://2019.igem.org/wiki/images/6/67/T--Washington--AngelWong.jpg",
+	"https://2019.igem.org/wiki/images/e/ef/T--Washington--KarenImmendorf.jpg",
+	"https://2019.igem.org/wiki/images/b/b6/T--Washington--SidneyChan.jpg",
+	"https://2019.igem.org/wiki/images/2/22/T--Washington--SijiaZhang.jpg",
+	"https://2019.igem.org/wiki/images/5/5e/T--Washington--MaliaClark.jpg",
+	"https://2019.igem.org/wiki/images/a/ac/T--Washington--NatalieMurren.jpg",
+	"https://2019.igem.org/wiki/images/d/d2/T--Washington--GraceKim.jpg",
+	"https://2019.igem.org/wiki/images/2/24/T--Washington--NiteshChetry.jpg",
+	"https://2019.igem.org/wiki/images/9/9d/T--Washington--QuocTran.jpg",
+	"https://2019.igem.org/wiki/images/e/ed/T--Washington--VarunSridhar.jpg",
+	"https://2019.igem.org/wiki/images/3/31/T--Washington--VeraOkolo.jpg",
+	"https://2019.igem.org/wiki/images/d/d3/T--Washington--VivianHuynh.jpg",
+	"https://2019.igem.org/wiki/images/e/e2/T--Washington--HannahCheung.jpg",
+	"https://2019.igem.org/wiki/images/4/43/T--Washington--MaxZhou.jpg",
+	"https://2019.igem.org/wiki/images/d/d8/T--Washington--BrianHong.jpg",
+	"https://2019.igem.org/wiki/images/5/51/T--Washington--LauraFreeman.jpg"
+];
 
 export type ContentHashMapping = {
 	// If the key doesn't exist, it is possible for it to be undefined.
@@ -212,9 +248,9 @@ const teamData: TeamData = [
 	},
 	{
 		NAME: "Chi Truong",
-		ROLE: "Fundraising Lead, Simulations",
+		ROLE: "Fundraising Lead, Simulations, Design",
 		PICTURE: "https://2019.igem.org/wiki/images/3/35/T--Washington--ChiTruong.jpg",
-		FILTER: "Leadership, Simulations",
+		FILTER: "Leadership, Simulations, Design",
 		LINKEDIN: "https://www.linkedin.com/in/chi-truong-241461133/",
 		BIO: "Born and raised in Vietnam, Chi Truong is currently a Junior in Biochemistry at the University of Washington. She came to UW iGEM to explore research and meet new people. She focuses on funding for the team. She also works with Simulations team to generate models using Rosetta and PyMOL. In her free time, she enjoys cooking, listening to music and reading history books.",
 		CUSTSIZE: 110
@@ -304,11 +340,10 @@ const teamData: TeamData = [
 	},
 	{
 		NAME: "Shean Fu Phen",
-		PICTURE: "https://2019.igem.org/wiki/images/d/d9/T--Washington--HLogo1.png", //TODO:
+		PICTURE: "https://2019.igem.org/wiki/images/e/e0/T--Washington--SheanPham.jpg",
 		BIO: "Shean Fu is a sophomore studying Physiology at the University of Washington. He is part of both wetlab and outreach in a bid to help translate the complicated science into something much easier to understand. Outside of lab he does a lot of archery and Wushu, as well as filming dance covers for a dance team.",
-		ROLE: "Outreach, Lab Scientist", // TODO:
-		FILTER: "Outreach, Wetlab",
-		CUSTSIZE: 75
+		ROLE: "Outreach, Lab Scientist",
+		FILTER: "Outreach, Wetlab"
 	},
 	{
 		NAME: "Monet Tosch-Berneburg",
@@ -319,15 +354,14 @@ const teamData: TeamData = [
 	},
 	{
 		NAME: "Pacy Wu",
-		PICTURE: "https://2019.igem.org/wiki/images/d/d9/T--Washington--HLogo1.png", //TODO:
+		PICTURE: "https://2019.igem.org/wiki/images/6/67/T--Washington--PacyWu.jpg",
 		BIO: "Pacy was born and raised in Taiwan. She is currently a sophomore intending to major in computer science. In iGEM, she was involved with the simulations and fundraising team. During her free time, she enjoys watching TV shows, listening to music, and hanging out with friends.",
 		ROLE: "Fundraising, Simulations",
-		FILTER: "Fundraising, Simulations",
-		CUSTSIZE: 75
+		FILTER: "Fundraising, Simulations"
 	},
 	{
 		NAME: "Allison Lee",
-		PICTURE: "https://2019.igem.org/wiki/images/8/8b/T--Washington--AllisonLee.jpg", //TODO: 
+		PICTURE: "https://2019.igem.org/wiki/images/8/8b/T--Washington--AllisonLee.jpg",
 		BIO: "Allison is a fourth-year undergraduate student studying Informatics. She was on the web development subteam and helped create the wiki. Outside of iGEM, she enjoys baking, hiking, and bouldering.",
 		ROLE: "Web Developer",
 		FILTER: "Web Dev"
@@ -427,6 +461,37 @@ const teamData: TeamData = [
 		PICTURE: "https://2019.igem.org/wiki/images/e/e2/T--Washington--HannahCheung.jpg",
 		ROLE: "Collaborations Lead, Outreach, Simulations, Presenter",
 		FILTER: "Collaborations, Outreach, Simulations, Presenters, Leadership"
+	},
+	{
+		NAME: "Max Zhou",
+		BIO: "Max is from Hangzhou, China and is currently a junior in computer science and informatics. He worked on the wiki editing tools in the web development team. Outside of iGEM he enjoys cooking and Ping Pong.",
+		PICTURE: "https://2019.igem.org/wiki/images/4/43/T--Washington--MaxZhou.jpg",
+		ROLE: "Web Developer",
+		FILTER: "Web Dev",
+		GITHUB: "https://github.com/zhouyifan0904",
+		LINKEDIN: "https://www.linkedin.com/in/max-zhou-99913217a/"
+	},
+	{
+		NAME: "Brian Hong",
+		PICTURE: "https://2019.igem.org/wiki/images/d/d8/T--Washington--BrianHong.jpg",
+		BIO: "Brian is a second year University of Washington student planning to major in electrical engineering and neuroscience. He joined iGEM to learn more about synthetic biology and its potential applications. Along the way, he has acquired many valuable lab research skills. Outside of iGEM, he enjoys writing, reading, film, and practicing kendo.",
+		ROLE: "Lab Scientist, Fundraising",
+		FILTER: "Wetlab, Fundraising"
+	},
+	{
+		NAME: "Laura Freeman",
+		PICTURE: "https://2019.igem.org/wiki/images/5/51/T--Washington--LauraFreeman.jpg",
+		BIO: "",
+		ROLE: "Web Developer",
+		FILTER: "Web Dev",
+		LINKEDIN: "http://www.linkedin.com/in/lxfreeman"
+	},
+	{
+		NAME: "Simran Sidhu",
+		PICTURE: "https://2019.igem.org/wiki/images/4/4d/T--Washington--SimranSidhu.jpg",
+		BIO: "Simran is a sophomore intending to major in bioengineering. This year, Simran was primarily responsible for organizing outreach events with schools and the community and hosting Sit Down with Synbio. Outside of iGEM and her other academic responsibilities, Simran is an avid runner and enjoys exploring the trails of the Pacific Northwest.",
+		ROLE: "Public Engagement Lead, Lab Scientist, Outreach",
+		FILTER: "Leadership, Integrated Human Practices, Outreach, Wetlab"
 	}
 ];
 

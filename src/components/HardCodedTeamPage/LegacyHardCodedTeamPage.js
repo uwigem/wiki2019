@@ -103,6 +103,9 @@ export class Team extends Component {
 			imageLoad.onload = () => this.setLoaded(i);
 		})
 
+		// let a = this.props.data.map(d => `"${d.PICTURE}"`).join(",");
+		// console.log(a);
+
 		if ((window.innerWidth < this.minminThres || (window.innerWidth <= this.maxThres && window.innerWidth > this.minThres))) {
 			this.setState({ smallerCardBody: true, cardBody: this.minBody });
 		} else if ((window.innerWidth >= this.minminThres && (window.innerWidth > this.maxThres || window.innerWidth <= this.minThres))) {
