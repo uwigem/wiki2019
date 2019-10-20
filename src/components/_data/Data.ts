@@ -2,6 +2,8 @@ import NavbarData, { NavbarType } from './NavbarData/NavbarData';
 import { COLORS } from './Constants';
 import { ContentSingularData } from './ContentSingularData';
 
+export const VERSION = "1.1.0";
+
 export default class Data {
 	static getImgsToPrefetch(): string[] {
 		return imgs;
@@ -82,10 +84,11 @@ export type ContentPageData = {
 	hasSidebar: boolean
 	contentOrder?: string[]
 	content?: ContentHashMapping
+	MISC?: string
 }
 
 export type ContentData = {
-	[idx: string]: ContentPageData,
+	[idx: string]: ContentPageData
 }
 
 export type PageSpecificColors = {
@@ -133,7 +136,7 @@ export type SponsorsData = {
 const sponsorsData: SponsorsData = [
 	{
 		NAME: "UW Paul G. Allen School of Computer Science and Engineering",
-		PICTURE: "https://2019.igem.org/wiki/images/2/20/T--Washington--Logo_CSE_Compressed.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/1/1c/T--Washington--CSELogo.png",
 		FILTER: "Diamond",
 		LINK: "https://www.cs.washington.edu/",
 		BIO: "",
@@ -141,7 +144,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "UW Department of Biochemistry",
-		PICTURE: "https://2019.igem.org/wiki/images/d/da/T--Washington--Logo_Biochem.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/8/88/T--Washington--BioChemLogo.png",
 		FILTER: "Diamond",
 		LINK: "https://depts.washington.edu/biowww/",
 		BIO: "",
@@ -149,7 +152,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "Institute for Protein Design",
-		PICTURE: "https://2019.igem.org/wiki/images/b/b8/T--Washington--Logo_IPD.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/c/c7/T--Washington--IPDLogo.png",
 		FILTER: "Gold",
 		LINK: "https://www.ipd.uw.edu/",
 		BIO: "",
@@ -157,7 +160,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "UW College of Engineering",
-		PICTURE: "https://2019.igem.org/wiki/images/6/6a/T--Washington--Logo_College_of_Engineering.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/c/c7/T--Washington--COELogo.png",
 		FILTER: "Gold",
 		LINK: "https://www.engr.washington.edu/",
 		BIO: "",
@@ -165,7 +168,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "PVP Biologics",
-		PICTURE: "https://2019.igem.org/wiki/images/8/87/T--Washington--Logo_PvP_Biologics.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/5/50/T--Washington--MSELogo.png",
 		FILTER: "Gold",
 		LINK: "https://www.pvpbio.com/",
 		BIO: "",
@@ -173,7 +176,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "UW Department of Biology",
-		PICTURE: "https://2019.igem.org/wiki/images/4/46/T--Washington--Logo_Bio.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/5/54/T--Washington--BioLogo.png",
 		FILTER: "Silver",
 		LINK: "https://www.biology.washington.edu/",
 		BIO: "",
@@ -181,7 +184,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "UW Department of Chemistry",
-		PICTURE: "https://2019.igem.org/wiki/images/0/04/T--Washington--Logo_Chemistry.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/5/58/T--Washington--ChemLogo.png",
 		FILTER: "Silver",
 		LINK: "http://depts.washington.edu/chem/",
 		BIO: "",
@@ -189,7 +192,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "UW Department of Bioengineering",
-		PICTURE: "https://2019.igem.org/wiki/images/3/3a/T--Washington--Logo_Bioe.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/f/f4/T--Washington--BioELogo.png",
 		FILTER: "Silver",
 		LINK: "https://bioe.uw.edu/",
 		BIO: "",
@@ -197,7 +200,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "UW Department of Microbiology",
-		PICTURE: "https://2019.igem.org/wiki/images/6/67/T--Washington--Logo_Microbio.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/0/02/T--Washington--MicroBioLogo.png",
 		FILTER: "Bronze",
 		LINK: "https://microbiology.washington.edu/",
 		BIO: "",
@@ -205,7 +208,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "UW Department of Applied Math",
-		PICTURE: "https://2019.igem.org/wiki/images/a/a4/T--Washington--Logo_AMATH.jpg",
+		PICTURE: "https://2019.igem.org/wiki/images/4/41/T--Washington--AppliedMathLogo.png",
 		FILTER: "Bronze",
 		LINK: "https://amath.washington.edu/",
 		BIO: "",
@@ -213,7 +216,7 @@ const sponsorsData: SponsorsData = [
 	},
 	{
 		NAME: "Promega",
-		PICTURE: "https://2019.igem.org/wiki/images/f/f6/T--Washington--Logo_Promega.jpeg",
+		PICTURE: "https://2019.igem.org/wiki/images/8/84/T--Washington--Promega.png",
 		FILTER: "Bronze",
 		LINK: "https://www.promega.com",
 		BIO: "",
@@ -481,7 +484,7 @@ const teamData: TeamData = [
 	{
 		NAME: "Laura Freeman",
 		PICTURE: "https://2019.igem.org/wiki/images/5/51/T--Washington--LauraFreeman.jpg",
-		BIO: "",
+		BIO: "Laura is a senior studying informatics and human-computer interaction. Her focus was consulting with the web development team on UI and UX, and she created the design guidelines for this year's wiki. Right now, she also works part time as a product designer for a growing commute benefits provider called Luum. She's excited to be graduating in the end of 2019!",
 		ROLE: "Web Developer",
 		FILTER: "Web Dev",
 		LINKEDIN: "http://www.linkedin.com/in/lxfreeman"
@@ -492,6 +495,53 @@ const teamData: TeamData = [
 		BIO: "Simran is a sophomore intending to major in bioengineering. This year, Simran was primarily responsible for organizing outreach events with schools and the community and hosting Sit Down with Synbio. Outside of iGEM and her other academic responsibilities, Simran is an avid runner and enjoys exploring the trails of the Pacific Northwest.",
 		ROLE: "Public Engagement Lead, Lab Scientist, Outreach",
 		FILTER: "Leadership, Integrated Human Practices, Outreach, Wetlab"
+	},
+	{
+		NAME: "Joshua Ip",
+		PICTURE: "https://2019.igem.org/wiki/images/b/bb/T--Washington--JoshuaIp.jpg",
+		BIO: "Joshua Ip is a computer science major with a background in bioengineering. After iGEM, he plans to pursue software engineering.",
+		ROLE: "Simulations Lead",
+		FILTER: "Leadership, Simulations"
+	},
+	{
+		NAME: "Ed van Bruggen",
+		BIO: "Originally from the bay area, Ed is now a junior at UW pursuing a major in physics. He was a lead for the Simulations team, where he taught computation methods for understanding biological systems with tools such as Rosetta and Tellurium. When he's not staying up all night programming you can find him playing music or cooking.",
+		PICTURE: "https://2019.igem.org/wiki/images/e/e1/T--Washington--EdvanBruggen.jpg",
+		ROLE: "Simulations Lead",
+		FILTER: "Simulations, Leadership"
+	},
+	{
+		NAME: "Yoshi Goto",
+		BIO: "Yoshi graduated in 2018 from the University of Washington with a B.S. in Bioengineering and a minor in Applied Mathematics, specializing in Synthetic and Systems Biology. He has been involved in iGEM for four years through team Washington, starting as a team member and moving through different positions. He now works as a Director of Operations at SoundBio Lab, Seattle's Community Lab. He is also an adviser for the SoundBio high school team. He credits iGEM as a career changer that led him to focus on synthetic and system biology, and to be involved in the DIYBio world. He is also actively involved in After iGEM Committees, and represented the iGEM Foundation as a Representative at SynBioBeta 2019. He believes that iGEM can change students' lives and foster innovation in an exciting field of biotechnology.",
+		PICTURE: "https://2019.igem.org/wiki/images/c/c1/T--Washington--YoshiGoto.jpg",
+		ROLE: "Adviser",
+		FILTER: "Adviser",
+		LINKEDIN: "https://www.linkedin.com/in/yoshigoto/"
+	},
+	{
+		NAME: "Karl Anderson",
+		PICTURE: "https://2019.igem.org/wiki/images/e/e1/T--Washington--KarlAnderson.jpg",
+		BIO: "Karl is a senior studying Biochemistry and Molecular Biology. This year he assisted the wetlab and project development teams to help design the project and review lab work. He has previously been a wetlab member and project manager. Outside of iGEM, he is a researcher in the Lidstrom Lab at UW, where he is engineering enzymes to develop novel carbon assimilation pathways in bacteria.",
+		LINKEDIN: "https://www.linkedin.com/in/karlbanderson/",
+		ROLE: "Adviser",
+		FILTER: "Adviser"
+	},
+	{
+		NAME: "Dr. Herbert Sauro",
+		BIO: "Dr. Sauro’s lab has been involved in a number of areas in systems as well as synthetic biology. He imitated the development of SBOL, the synthetic biology open language which is becoming the de facto language for describing synthetic designs. In systems biology he has developed a number of software tools, and standards most recently a Python based kit called Tellurium. He was cofounder of the SBML development teach. His modeling research involves developing new robust methods to develop more reliable predictive models that can simulate diseases such as cancer. Recently, he was appointed to lead a large Center for Reproducible Biomedical Modeling which was also recently awarded by the NIH.",
+		PICTURE: "https://2019.igem.org/wiki/images/8/8f/T--Washington--HerbertSauro.jpg",
+		WEBSITE: "https://www.sys-bio.org/",
+		ROLE: "University of Washington Department of Bioengineering",
+		FILTER: "PIs",
+		YPOS: 0.01
+	},
+	{
+		NAME: "Dr. Liangcai Gu",
+		BIO: "Dr. Gu's lab use quantitative protein interaction profiling to understand molecular recognition and guide computational protein design. They develop protein interaction sequencing technologies by coupling ‘protein barcoding’ techniques—e.g., molecular attachment of proteins to barcoding DNAs, display of proteins on phage or cell surfaces, and indirect barcoding of unlabeled proteins by using DNA barcoded affinity reagents such as antibodies—to massively parallel 'in situ DNA sequencing' to quantitate protein interactions at a single-molecule or single-cell level. One example of protein interaction sequencing is a single-molecular-interaction sequencing (SMI-seq) technology (Gu, et al., Nature, 2014) for large-scale molecular counting of proteins and complexes. Our current research interests include (1) engineering of ligand-responsive protein assemblies, (2) human protein interactome profiling and drug screening, and (3) functional profiling of B-cell and T-cell receptors.",
+		PICTURE: "https://2019.igem.org/wiki/images/a/ad/T--Washington--LiangcaiGu.jpg",
+		WEBSITE: "https://depts.washington.edu/biowww/pages/faculty-Gu.shtml",
+		ROLE: "University of Washington Department of Biochemistry",
+		FILTER: "PIs"
 	}
 ];
 
