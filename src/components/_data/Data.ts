@@ -19,6 +19,10 @@ export default class Data {
 		return teamData;
 	}
 
+	static getSponsorsData() {
+		return sponsorsData;
+	}
+
 	static getNavbarDataTitleFromLink(pageTitle: string): string {
 		let returnString = "";
 		NavbarData.getData().forEach((navItem: NavbarType) => {
@@ -77,6 +81,109 @@ export type TeamData = {
 	XPOS?: number,
 	YPOS?: number
 }[]
+
+export type SponsorsData = {
+	NAME: string,
+	PICTURE: string,
+	FILTER: string,
+	XPOS?: number,
+	YPOS?: number,
+	CUSTSIZE?: number,
+	LINK: string,
+	BIO: string,
+	SUBTEXT: string
+}[];
+
+const sponsorsData: SponsorsData = [
+	{
+		NAME: "UW Paul G. Allen School of Computer Science and Engineering",
+		PICTURE: "https://2019.igem.org/wiki/images/2/20/T--Washington--Logo_CSE_Compressed.jpeg",
+		FILTER: "Diamond",
+		LINK: "https://www.cs.washington.edu/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "UW Department of Biochemistry",
+		PICTURE: "https://2019.igem.org/wiki/images/d/da/T--Washington--Logo_Biochem.jpeg",
+		FILTER: "Diamond",
+		LINK: "https://depts.washington.edu/biowww/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "Institute for Protein Design",
+		PICTURE: "https://2019.igem.org/wiki/images/b/b8/T--Washington--Logo_IPD.jpeg",
+		FILTER: "Gold",
+		LINK: "https://www.ipd.uw.edu/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "UW College of Engineering",
+		PICTURE: "https://2019.igem.org/wiki/images/6/6a/T--Washington--Logo_College_of_Engineering.jpeg",
+		FILTER: "Gold",
+		LINK: "https://www.engr.washington.edu/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "PVP Biologics",
+		PICTURE: "https://2019.igem.org/wiki/images/8/87/T--Washington--Logo_PvP_Biologics.jpeg",
+		FILTER: "Gold",
+		LINK: "https://www.pvpbio.com/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "UW Department of Biology",
+		PICTURE: "https://2019.igem.org/wiki/images/4/46/T--Washington--Logo_Bio.jpeg",
+		FILTER: "Silver",
+		LINK: "https://www.biology.washington.edu/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "UW Department of Chemistry",
+		PICTURE: "https://2019.igem.org/wiki/images/0/04/T--Washington--Logo_Chemistry.jpeg",
+		FILTER: "Silver",
+		LINK: "http://depts.washington.edu/chem/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "UW Department of Bioengineering",
+		PICTURE: "https://2019.igem.org/wiki/images/3/3a/T--Washington--Logo_Bioe.jpeg",
+		FILTER: "Silver",
+		LINK: "https://bioe.uw.edu/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "UW Department of Microbiology",
+		PICTURE: "https://2019.igem.org/wiki/images/6/67/T--Washington--Logo_Microbio.jpeg",
+		FILTER: "Bronze",
+		LINK: "https://microbiology.washington.edu/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "UW Department of Applied Math",
+		PICTURE: "https://2019.igem.org/wiki/images/a/a4/T--Washington--Logo_AMATH.jpg",
+		FILTER: "Bronze",
+		LINK: "https://amath.washington.edu/",
+		BIO: "",
+		SUBTEXT: ""
+	},
+	{
+		NAME: "Promega",
+		PICTURE: "https://2019.igem.org/wiki/images/f/f6/T--Washington--Logo_Promega.jpeg",
+		FILTER: "Bronze",
+		LINK: "https://www.promega.com",
+		BIO: "",
+		SUBTEXT: ""
+	}
+];
 
 const teamData: TeamData = [
 	{
@@ -237,23 +344,23 @@ const teamData: TeamData = [
 		NAME: "Karen Immendorf",
 		PICTURE: "https://2019.igem.org/wiki/images/e/ef/T--Washington--KarenImmendorf.jpg",
 		BIO: "Karen is a 4th year student at UW majoring in Molecular, Cellular, and Developmental Biology. She is currently work in the Center for Integrative Brain Research of Seattle Children's Research Institute in a lab that focuses on uncovering how gene mutations affect protein machinery in the glutamate synapse which may ultimately lead to autism spectrum disorders. She is interested the potential applications of Washington iGEM's project across fields of Research, Medicine, and Biotechnology and learning more about product development through speaking with stakeholders in these fields.",
-		ROLE: "Human Practices Lead, Fundraising, Presenter",
-		FILTER: "Human Practices, Fundraising, Presenters",
+		ROLE: "Integrated Human Practices Lead, Fundraising, Presenter",
+		FILTER: "Integrated Human Practices, Fundraising, Presenters, Leadership",
 		LINKEDIN: "https://www.linkedin.com/in/karenimmendorf/"
 	},
 	{
 		NAME: "Sidney Chan",
 		BIO: "Sidney is a 3rd year student at UW who is majoring in Biochemistry and has a strong interest in pursuing research in drug delivery systems and novel therapeutics. She became interested in the UW iGEM team’s project after learning more about the field of synthetic biology and its intersection with medicine and biotechnology, and joined the Business team to learn more about the considerations that go into marketing and managing a product with biotechnological applications.",
 		PICTURE: "https://2019.igem.org/wiki/images/b/b6/T--Washington--SidneyChan.jpg",
-		ROLE: "Human Practices",
-		FILTER: "Human Practices"
+		ROLE: "Integrated Human Practices",
+		FILTER: "Integrated Human Practices"
 	},
 	{
 		NAME: "Sijia Zhang",
 		BIO: "Sijia is a Junior at the University of Washington that is majoring in Bioengineering. He is interested in the development of stem cell engineering and synthetic biology. Currently, He is working in the Kwon lab at the University of Washington. He has joined the business team to explore the market of current biotechnology that is related to what he is studying and researching on.",
 		PICTURE: "https://2019.igem.org/wiki/images/2/22/T--Washington--SijiaZhang.jpg",
-		ROLE: "Human Practices",
-		FILTER: "Human Practices"
+		ROLE: "Integrated Human Practices",
+		FILTER: "Integrated Human Practices"
 	},
 	{
 		NAME: "Malia Clark",

@@ -26,7 +26,7 @@ export class Team extends Component {
 			"Wetlab",
 			"Outreach",
 			"Design",
-			"Human Practices",
+			"Integrated Human Practices",
 			"Web Dev",
 			"Adviser",
 			"Leadership",
