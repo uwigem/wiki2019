@@ -130,12 +130,6 @@ export const ContentMapping: ContentMappingType = {
 		displayName: "Accordion",
 		widgetCategory: WidgetCategories.Display
 	},
-	TEAMPAGE: {
-		widget: memo(TeamPage),
-		editor: TeamPageEditor,
-		displayName: "Team Page/Sponsor Page, do not use",
-		widgetCategory: WidgetCategories.Display
-	},
 	HEADER: {
 		widget: memo(Header),
 		editor: HeaderEditor,
