@@ -15,6 +15,7 @@ import "./App.css";
 import { FONT_FAMILY } from './components/_data/Constants';
 import { HardCodedMainPage } from './components/HardcodedMainPage/HardCodedMainPage';
 import { Team } from './components/HardCodedTeamPage/LegacyHardCodedTeamPage';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // This line is to remove a bug that Firefox has
 // TODO: insert link explaining why
@@ -26,7 +27,7 @@ type AppProps = {
 	firebase?: any,
 	ContentEditor: React.FC<ContentEditorProps>
 }
-const debugURL = "/Team";
+const debugURL = "/Editor";
 
 /**
  * App is the main application that handles all the route logic and rendering.
