@@ -3,6 +3,7 @@ import { ContentSingularData } from '../../_data/ContentSingularData';
 import './ImageCarousel.css';
 import Carousel from 'react-bootstrap/Carousel';
 
+
 export type CarouselSettings = {
 	showIndicators: boolean;
 	showControls: boolean;

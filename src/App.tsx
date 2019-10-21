@@ -15,7 +15,8 @@ import "./App.css";
 import { FONT_FAMILY } from './components/_data/Constants';
 import { HardCodedMainPage } from './components/HardcodedMainPage/HardCodedMainPage';
 import { Team } from './components/HardCodedTeamPage/LegacyHardCodedTeamPage';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Sponsors } from './components/HardCodedSponsorsPage/LegacyHardCodedSponsorsPage';
+
 
 // This line is to remove a bug that Firefox has
 // TODO: insert link explaining why
@@ -200,6 +201,12 @@ const App: React.FC<AppProps> = ({ IEOREDGE, currYear, firebase, ContentEditor }
 						{pageTitle !== "/Editor"
 							&& pageTitle === "/Team"
 							&& <Team data={Data.getTeamData()} />
+
+						}
+						{/** HARDCODED SPONSORS PAGE */}
+						{pageTitle !== "/Editor"
+							&& pageTitle === "/Sponsors"
+							&& <Sponsors data={Data.getSponsorsData()} />
 
 						}
 						{/*********REGULAR CONTENT VIEW*************/}
