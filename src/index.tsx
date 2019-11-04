@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { detect } from 'detect-browser';
-import { ContentEditor } from './components/ContentEditor/ContentEditor';
 
 
 /**
@@ -18,12 +17,15 @@ import { ContentEditor } from './components/ContentEditor/ContentEditor';
 //////// CONFIG ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// COMMENT/UNCOMMENT BELOW TO ENABLE OR DISABLE FIREBASE TO THE PROJECT
-import firebase from 'firebase';
-import 'firebase/app'
-import 'firebase/messaging';
+// // COMMENT / UNCOMMENT BELOW TO ENABLE OR DISABLE FIREBASE TO THE PROJECT
+import { ContentEditor } from './components/ContentEditor/ContentEditor';
+import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
+
+export type FIREBASE = typeof import('firebase');
+export type FIREBASE_USER = firebase.User;
+export type FIREBASE_DATABASE_REFERENCE = firebase.database.Reference;
 
 const firebaseConfig = {
 	apiKey: "AIzaSyBkr6jirFdzkMofucO2z_KzN13hMDeWkVI",
@@ -35,8 +37,17 @@ const firebaseConfig = {
 	appId: "1:131891776719:web:0bf2382aec94dcdf"
 };
 firebase.initializeApp(firebaseConfig);
+
+//............................
+
 // let firebase = null;
-// firebase.auth().signInWithPopup(provider);
+// let ContentEditor = null;
+// export type FIREBASE = any;
+// export type FIREBASE_USER = any;
+// export type FIREBASE_DATABASE_REFERENCE = any;
+
+
+//////////////////////////////////////////////////////
 
 // ENTER THE CURRENT iGEM SEASON YEAR AS IN THE iGEM WIKI LINK (eg 2019.igem.org)
 let currYear = 2019;
@@ -61,12 +72,12 @@ const notSupportedMessage = (browser: string) => {
 }
 let IEOREDGE = false;
 switch (browser && browser.name) {
-	case 'edge':
-		IEOREDGE = true;
-		if (browser && browser.name) {
-			notSupportedMessage(browser.name);
-		}
-		break;
+	// case 'edge':
+	// 	IEOREDGE = true;
+	// 	if (browser && browser.name) {
+	// 		notSupportedMessage(browser.name);
+	// 	}
+	// 	break;
 	case 'ie':
 		IEOREDGE = true;
 		if (browser && browser.name) {

@@ -76,7 +76,7 @@ export const ContentView: React.FC<ContentViewProps> = ({ contentData, pageTitle
 							ContentWidget = ContentMapping[content!.type].widget;
 						}
 
-						return content!.type === "BANNER" ? null : <Fade><div id={contentHash} key={contentHash}>
+						return content!.type === "BANNER" ? null : <Fade key={contentHash}><div id={contentHash}>
 							<ContentWidget {...content} />
 						</div></Fade>
 					})

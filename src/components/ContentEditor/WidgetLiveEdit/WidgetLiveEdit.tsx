@@ -2,24 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { ContentSingularData } from '../../_data/ContentSingularData';
 import Button from '@material-ui/core/Button';
 import { HistoryTypes } from '../../_debug/EditorHistory';
-import firebase from 'firebase';
 import './WidgetLiveEdit.css';
 import {
-	LIVE_EDIT_TIMETOUT,
+	LIVE_EDIT_TIMEOUT,
 	LIVE_EDIT_REFRESH,
 	CURRENTLY_EDITED_BY_YOU_MESSAGE,
 	SAFE_MESSAGE
 } from '../../_data/Constants';
+import { FIREBASE, FIREBASE_DATABASE_REFERENCE, FIREBASE_USER } from '../../../index';
 
 type WidgetLiveEditProps = {
 	contentHash: string,
 	currYear: number,
 	pageToEdit: string,
-	user: firebase.User | null
+	user: FIREBASE_USER | null
 	editing: boolean
 	setEditing: any,
 	editedContent: ContentSingularData,
-	deleteWidget: (contentHash: string) => void
+	deleteWidget: (contentHash: string) => void,
+	firebase: FIREBASE
 };
 
 enum EditingState {
@@ -35,13 +36,12 @@ enum EditingState {
  */
 
 export const WidgetLiveEdit: React.FC<WidgetLiveEditProps> = ({
-	contentHash, currYear, pageToEdit, user, editing, setEditing, editedContent, deleteWidget
+	contentHash, currYear, pageToEdit, user, editing, setEditing, editedContent, deleteWidget, firebase
 }) => {
-
 	let [editingState, setEditingState] = useState<EditingState>(EditingState.SAFE);
 	let [message, setMessage] = useState<string>(SAFE_MESSAGE);
 
-	let widgetRef: firebase.database.Reference = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
+	let widgetRef: FIREBASE_DATABASE_REFERENCE = firebase.database().ref(`${currYear}/LiveEditHistory/${pageToEdit}/${contentHash}`);
 
 	// update firebase with the current timestamp
 	const updateOnce = () => {
@@ -66,13 +66,13 @@ export const WidgetLiveEdit: React.FC<WidgetLiveEditProps> = ({
 
 	useEffect(() => {
 		// set up listener to firebase, re-render when updated
-		widgetRef.on('value', (snapshot) => {
+		widgetRef.on('value', (snapshot: any) => {
 			let record = snapshot.val();
 			if (record) {
 				let diff: number = (Date.now() - record.timestamp) / 1000;
 				let saved: boolean = record.saved;
 
-				if (!saved && diff < LIVE_EDIT_TIMETOUT) {
+				if (!saved && diff < LIVE_EDIT_TIMEOUT) {
 					// not saved and not yet timed out
 					let editorName = record.editor;
 					if (user && editorName === user.email) {

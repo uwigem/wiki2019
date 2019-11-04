@@ -5,12 +5,12 @@
 	top: 0px;
 	left: 0px;
 	position: relative;
-	filter: blur(2px);
+	filter: blur(1px);
 	z-index: 1;
 }
 
 .hcmp-bgdiv {
-	height: 50vh;
+	height: 35vh;
 	width: 100%;
 	background-color: rgb(30, 8, 66);
 	opacity: 0.5;
@@ -41,7 +41,7 @@
 }
 
 .hcmp-abstractwrapper p {
-	column-count: 3;
+	column-count: 1;
 }
 
 .hcmp-sep {

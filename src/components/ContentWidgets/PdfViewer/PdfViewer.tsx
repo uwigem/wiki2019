@@ -23,9 +23,11 @@ export const PdfViewer: React.FC<ContentSingularData> = ({
 		height: pdfViewer_pdfHeightPixel + "px"
 	};
 
-	return <embed
-		className="pdf-viewer-pdf wi-content-wrapper"
-		src={pdfViewer_pdfLink}
-		type="application/pdf"
-		style={pdfStyle} />
+	return <div className="centered">
+		<embed
+			className="pdf-viewer-pdf wi-content-wrapper"
+			src={pdfViewer_pdfLink}
+			type="application/pdf"
+			style={pdfStyle} />
+	</div>
 }

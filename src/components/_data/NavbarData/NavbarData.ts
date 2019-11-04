@@ -56,8 +56,8 @@ let navbarData: NavbarType[] = [
 	},
 	{
 		title: "People",
-		names: ["Team", "Attributions", "Sponsors", "Gallery"],
-		links: ["/Team", "/Attributions", "/Sponsors", "/Gallery"],
+		names: ["Team", "Attributions", "Sponsors"],
+		links: ["/Team", "/Attributions", "/Sponsors"],
 		key: "people"
 	},
 	{

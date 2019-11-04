@@ -93,8 +93,12 @@ export const SideBar: React.FC<SideBarProps> = ({
 		}
 	});
 
+	let totalSections = 0;
 	let generateSectionLinks = contentData[pageTitle].contentOrder!!.map((content) => {
 		let widgetInfo = contentData[pageTitle].content![content]
+		if (widgetInfo!.type === "HEADER") {
+			totalSections++;
+		}
 		return widgetInfo!.type === "HEADER" ? <li id={content + "-link"}
 			key={content}
 			className={content === currentActiveSection.sectionID ? "active-section" : "nonactive-section"}
@@ -105,7 +109,7 @@ export const SideBar: React.FC<SideBarProps> = ({
 
 	let progress = currentActiveSection ?
 		Math.round((currentActiveSection.index + 1) / currentActiveSection.totalSections * 100.0) : 0;
-	return <div id="sidebar-container" style={{ height: (contentData[pageTitle].contentOrder!.length * 12) + "px" }}>
+	return <div id="sidebar-container" style={{ height: (totalSections * 27) + "px" }}>
 		<ul id="sidebar">
 			{contentData[pageTitle].content ? generateSectionLinks : null}
 		</ul>

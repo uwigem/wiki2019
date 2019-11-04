@@ -1,8 +1,9 @@
 import { createContext } from 'react';
+import { FIREBASE } from '../../index';
 
 type Environment = {
-    windowWidth: Number,
-    firebase: typeof import('firebase') | null
+	windowWidth: Number,
+	firebase: FIREBASE | null
 }
 
 /**
@@ -14,6 +15,6 @@ type Environment = {
  * July 17, 2019
  */
 export const EnvironmentContext = createContext<Environment>({
-    windowWidth: 0,
-    firebase: null
+	windowWidth: 0,
+	firebase: null
 });

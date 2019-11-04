@@ -7,13 +7,14 @@ import equal from 'deep-equal';
 import { EnvironmentContext } from '../../../contexts/EnvironmentContext/EnvironmentContext';
 import { WidgetLiveEdit } from '../WidgetLiveEdit/WidgetLiveEdit';
 import { FailureWidget, FailureEditWidget } from './FailureWidget/FailureWidget';
+import { FIREBASE_USER } from '../../../index';
 
 type WidgetEditorProps = {
 	content: ContentSingularData | undefined,
 	contentHash: string,
 	currYear: number,
 	pageToEdit: string,
-	user: firebase.User | null,
+	user: FIREBASE_USER | null,
 	deleteWidget: (contentHash: string) => void
 }
 
@@ -72,7 +73,8 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 					editing={false}
 					setEditing={setEditing}
 					editedContent={editedContent}
-					deleteWidget={deleteWidget} />
+					deleteWidget={deleteWidget}
+					firebase={firebase} />
 			</div>
 		</>}
 
@@ -122,7 +124,8 @@ export const WidgetEditor: React.FC<WidgetEditorProps> = ({ content, contentHash
 					editing={true}
 					setEditing={setEditing}
 					editedContent={editedContent}
-					deleteWidget={deleteWidget} />
+					deleteWidget={deleteWidget}
+					firebase={firebase} />
 			</div>
 		</>}
 	</div>

@@ -34,6 +34,7 @@
 ul {
 	list-style-image: none !important;
 	margin: 0 !important;
+	line-height: 1em !important;
 }
 
 a {
@@ -192,7 +193,8 @@ code {
 
 a {
 	text-decoration: none !important;
-	color: var(--main-color) !important;
+	color: var(--purple-primary) !important;
+	font-weight: bold;
 }
 
 a:hover {
